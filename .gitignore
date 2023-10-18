@@ -24,3 +24,4 @@ gulp/package-lock.json
 vendor.zip
 config.ini
 files
+vendor
