@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif; }
+
+span.error-msg {
+  font-size: 12px;
+  color: #f00 !important;
+  margin-top: 2px; }
+
+.sidebar-dark .nav-item .nav-link.active {
+  color: #fff; }
+  .sidebar-dark .nav-item .nav-link.active i {
+    color: #fff; }
+
+.no-dec:hover {
+  text-decoration: none; }
+.no-dec .card {
+  position: relative;
+  overflow: hidden; }
+  .no-dec .card .icon {
+    position: absolute;
+    bottom: -8px;
+    right: -10px;
+    opacity: 0.7; }
+    .no-dec .card .icon i {
+      font-size: 50px; }
+  .no-dec .card p, .no-dec .card i {
+    color: #000 !important; }
+
+.at-type {
+  display: block;
+  padding: 2px 5px;
+  width: 45px;
+  font-size: 10px;
+  color: #fff;
+  border-radius: 4px; }
+  .at-type b {
+    font-size: 12px; }
+  .at-type.fd {
+    background-color: green; }
+  .at-type.hd {
+    background-color: orange; }
+  .at-type.al {
+    background-color: red; }
+
+.at-row {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(166, 166, 166, 0.3); }
+
+header {
+  padding: 10px 0; }
+  header .logo {
+    font-size: 20px;
+    margin-bottom: 0;
+    padding: 7px 0px; }
+  header .brand {
+    font-size: 25px;
+    letter-spacing: 2px;
+    display: block;
+    font-weight: 300;
+    color: #353535; }
+
+.main p, .main li, .main h1, .main h2, .main h3, .main h4, .main h5, .main h6 {
+  color: #353535; }
+
+footer {
+  padding-top: 48px;
+  padding-bottom: 24px; }
+  footer .foot-brand {
+    font-size: 24px;
+    margin-bottom: 16px;
+    display: inline-block;
+    color: #353535; }
+  footer .footer-info ul {
+    padding-left: 0;
+    list-style: none; }
+    footer .footer-info ul li:not(:last-child) {
+      margin-bottom: 4px; }
+    footer .footer-info ul li i {
+      margin-top: 3px; }
+
+.table tr.green {
+  background-color: #0f0; }
+.table tr.red {
+  background-color: #f00; }
+.table tr.blue {
+  background-color: #00f; }
+.table tr.yellow {
+  background-color: yellow; }
+.table tr.green td, .table tr.red td, .table tr.blue td {
+  color: #fff !important; }
+.table tr.white td, .table tr.yellow td {
+  color: #000 !important; }
+
+.logo {
+  text-align: center; }
+
+.custom-black-bg {
+  background-color: #353535;
+  background-image: linear-gradient(180deg, #353535 10%, #353535 100%); }
+
+/*# sourceMappingURL=custom.css.map */
