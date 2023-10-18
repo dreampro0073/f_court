@@ -125,9 +125,14 @@ Route::group(['prefix'=>"admin"], function(){
 			Route::get('/add/{noting_id?}',[BtTransactionController::class, 'add']);
 
 		});
-		
-		
 	});
+	
+	Route::group(['prefix'=>"banks"], function(){
+		Route::get('/',[AdminController::class, 'banksList']);
+
+	});
+		
+		
 
 	
 
@@ -264,6 +269,10 @@ Route::group(['prefix'=>"api"], function(){
 	Route::group(['prefix'=>"day-book"], function(){
 		Route::post('/init',[DayBookController::class, 'initRes']);
 		Route::post('/store',[DayBookController::class, 'store']);
+	});
+
+	Route::group(['prefix'=>"banks"], function(){
+		Route::post('/store',[AdminController::class, 'storeBanks']);
 	});
 });
 

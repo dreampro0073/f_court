@@ -71,7 +71,25 @@ class AdminController extends Controller {
 
     }
 
+
+    public function banksList(){
+    	$banks_list = DB::table('banks')->get();
+
+    	return view('admin.banks.index', [
+            "sidebar" => "banks",
+            "subsidebar" => "banks",
+            "banks_list" => $banks_list,
+        ]);
+    }
+
 	
-  
+  	public function storeBanks(Request $request){
+  		DB::table('banks')->insert([
+  			'bank_name' => $request->bank_name,
+  		]);
+  		$data['success'] = true;
+  		$data['message'] = 'Successfully Updated!'; 
+  		return Response::json($data, 200, array());
+  	}
 
 }
