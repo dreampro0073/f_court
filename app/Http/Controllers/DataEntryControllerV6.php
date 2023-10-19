@@ -124,6 +124,7 @@ class DataEntryControllerV6 extends Controller {
 			}
 
 			$data = [
+				'client_name' => $request->client_name,
 				'bank_comp_id' => $request->bank_comp_id,
 				'case_name_1' => $request->case_name_1,
 				'case_name_2' => $request->case_name_2,
@@ -131,7 +132,9 @@ class DataEntryControllerV6 extends Controller {
 				'case_no_2' => $request->case_no_2,
 				'billing_type_id' => $billing_type_id,
 				'date' => ($request->date)?date("Y-m-d",strtotime($request->date)):null,
+				'next_date' => ($request->next_date)?date("Y-m-d",strtotime($request->next_date)):null,
 				'court_name' => $request->court_name,
+				'stage' => $request->stage,
 				'amount' => $request->amount,
 				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
 				'email'=>$request->has('email')?$request->email:null,

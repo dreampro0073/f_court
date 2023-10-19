@@ -27,10 +27,11 @@
                         <tr>
                             <th>Sn</th>
 
-                            <th>Bank name</th>
-                            <th>Through Type</th>
-                           
-                            <th>TAT</th>
+                            <th>Bank Name</th>
+                            <th>Bank Branch</th>
+                            <th>Brrower Name</th>
+                            <th>SRO/ Tehsil</th>
+                            <th>Tehsil/SRO</th>
                             
                             <th>#</th>
                         </tr>
@@ -42,13 +43,13 @@
                             <td>{{$key+1}}</td>
                             
                             <td>{{ $item->bank_name}}</td>
-                            <td>{{ $item->through_type}}</td>
-                            
-                            <td>{{ $item->day}}</td>
+                            <td>{{ $item->bank_branch}}</td>
+                            <td>{{ $item->borrower_name}}</td>
+                            <td>{{ $item->st_type}}</td>
+                            <td>{{ $item->tehsil_id}}</td>
                             
                             <td>
                                <a href="{{url('admin/data-entry/noting-charge/add/'.$item->id)}}" class="btn btn-primary btn-sm">Edit</a> 
-                               <!-- <a href="{{url('admin/data-entry/noting-charge/delete/'.$item->id)}}" onclick="return confirm('Are you sure to Delete?');" class="btn btn-danger btn-sm">Delete</a>  -->
                             </td>
                         </tr>
                         @endforeach

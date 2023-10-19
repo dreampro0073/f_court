@@ -113,6 +113,7 @@ class NotingChargeController extends Controller {
 
 			$data = [
 				'bank_comp_id' => $request->bank_comp_id,
+				'bank_branch' => $request->bank_branch,
 				'department' => $request->department,
 				'through_id' => $through_id,
 				'borrower_name' => $request->borrower_name,

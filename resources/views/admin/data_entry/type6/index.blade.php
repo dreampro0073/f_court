@@ -1,6 +1,5 @@
 @extends('admin.layout')
-
-
+ 
 @section('header_scripts')
  
 @endsection
@@ -21,15 +20,13 @@
     </div>    
     <div class="card shadow mb-4">
 
-
-      
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Sn</th>
-                            <th>Bank</th>
+                            <th>We are for</th>
                             <th>Case Name</th>
                             <th>Case No.</th>
                             <th>Bill Type</th>
@@ -44,10 +41,10 @@
                         @foreach($data as $key => $item)
                         <tr class="<?php echo App\Models\User::bgClass($item->status); ?>">
                             <td>{{$key+1}}</td>
-                            <td>{{$item->bank_name}}</td>
-                            <td>{{$item->case_name_1}} vs {{$item->case_name_2}}</td>
-                            <td>{{$item->case_no_1}} vs {{$item->case_no_2}}</td>
-                            <td>{{$item->bill_type}} vs {{$item->case_no_2}}</td>
+                            <td>{{$item->client_name}}</td>
+                            <td>{{$item->case_name_1}} / {{$item->case_name_2}}</td>
+                            <td>{{$item->case_no_1}} / {{$item->case_no_2}}</td>
+                            <td>{{$item->bill_type}} / {{$item->case_no_2}}</td>
                             <td>{{$item->show_status}}</td>
                             <td>
                                 <a href="{{url('admin/data-entry/type6/add/'.$item->id)}}" class="btn btn-sm btn-warning">Edit</a>

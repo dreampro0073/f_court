@@ -32,7 +32,7 @@
                     </div>
                      <div class="col-md-4 form-group">
                         <label>Department</label>
-                        <input type="text" ng-model="formData.department" class="form-control" required />
+                        <input type="text" ng-model="formData.department" class="form-control" />
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Through</label>
@@ -120,15 +120,6 @@
                         <label>Docs Received Date</label>
                         <input type="text" ng-model="formData.docs_received_on_dated" class="form-control datepicker3" />
                     </div>
-                    <div class="col-md-4 form-group">
-                        <label>Contact no</label>
-                        <input type="text" ng-model="formData.contact_no" class="form-control"  />
-                    </div>
-                    <div class="col-md-4 form-group">
-                        <label>Email</label>
-                        <input type="email" ng-model="formData.email" class="form-control"  />
-                    </div>
-
                     
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button> 
