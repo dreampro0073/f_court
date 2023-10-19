@@ -32,7 +32,10 @@ app.controller('type4Ctrl', function($scope , $http, $timeout , DBService) {
         DBService.postCall({draft_id:$scope.draft_id}, '/api/data-entry/type4/init').then((data) => {
             
             if(data.success) {
-                $scope.formData = data.draft_data; 
+                if(data.draft_data){
+                    $scope.formData = data.draft_data; 
+
+                }
                 $scope.drafts = data.drafts; 
                 $scope.through = data.through; 
                 $scope.billing_types = data.billing_types; 

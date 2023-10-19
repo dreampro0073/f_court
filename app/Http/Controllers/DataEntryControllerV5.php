@@ -19,8 +19,12 @@ class DataEntryControllerV5 extends Controller {
 	public function index(){
 
 		$sql = User::getMutations();
-
 		$mutations = $sql->get();
+		$st = User::showStatusList();
+		
+		foreach ($mutations as $key => $item) {
+			$item->show_status = (isset($item->status))?$st[$item->status]:'';
+		}
 
 		return view('admin.data_entry.type5.index', [
             "sidebar" => "entry",
@@ -81,7 +85,7 @@ class DataEntryControllerV5 extends Controller {
 			'name' => $request->name,
 			'date_of_apply' => $request->date_of_apply,
 			'seller_name' => $request->seller_name,
-			'contact_no' => $request->contact_no,
+			
 			'purchaser_name' => $request->purchaser_name,
 			'village_id' => $request->village_id,
 			'total_amount' => $request->total_amount,
@@ -93,7 +97,7 @@ class DataEntryControllerV5 extends Controller {
 			'name' => 'required',
 			'date_of_apply' => 'required',
 			'seller_name' => 'required',
-			'contact_no' => 'required',
+			
 			'village_id' => 'required',
 			'purchaser_name' => 'required',
 			'total_amount' => 'required',
@@ -138,8 +142,8 @@ class DataEntryControllerV5 extends Controller {
 			$data= [
 				'tehsil_id'=>$tehsil_id,
 				'name'=>$request->name,
-				'contact_no'=>$request->contact_no,
-				'email'=>$request->email,
+				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
+				'email'=>$request->has('email')?$request->email:null,
 				'date_of_apply'=>date("Y-m-d",strtotime($request->date_of_apply)),
 				'seller_name'=>$request->seller_name,
 				'purchaser_name'=>$request->purchaser_name,

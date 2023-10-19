@@ -117,29 +117,31 @@
 
                     <div class="col-md-4 form-group">
                         <label>Contact no</label>
-                        <input type="text" ng-model="formData.contact_no" class="form-control" required />
+                        <input type="text" ng-model="formData.contact_no" class="form-control"  />
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Email</label>
-                        <input type="text" ng-model="formData.email" class="form-control" required />
+                        <input type="text" ng-model="formData.email" class="form-control"  />
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Invoice Amount</label>
-                        <input type="text" ng-model="formData.amount" class="form-control" required />
+                        <input type="text" ng-model="formData.amount" class="form-control" />
                     </div>
                 </div>
-                <h5>Amount EMI</h5>
-                <div class="row mb-2" ng-repeat="emi_obj in formData.emi_ar track by $index">
-                    <div class="col-md-4">
-                        <input type="text" ng-model="emi_obj.e_amount" class="form-control" />
+                <div ng-if="formData.billing_type_id !=1">
+                    <h5>Amount EMI</h5>
+                    <div class="row mb-2" ng-repeat="emi_obj in formData.emi_ar track by $index">
+                        <div class="col-md-4">
+                            <input type="text" ng-model="emi_obj.e_amount" class="form-control" />
+                        </div>
+                        <div class="col-md-3 pt-1">
+                            <button ng-click="remove($index)" type="button" class="btn btn-sm btn-danger">Remove</button>
+                        </div>
+                        
                     </div>
-                    <div class="col-md-3 pt-1">
-                        <button ng-click="remove($index)" type="button" class="btn btn-sm btn-danger">Remove</button>
+                    <div class="pt-2 mb-4">
+                        <button ng-click="addEMI();" type="button" class="btn btn-info btn-sm">Add Amount</button> 
                     </div>
-                    
-                </div>
-                <div class="pt-2 mb-4">
-                    <button ng-click="addEMI();" type="button" class="btn btn-info">Add Amount</button> 
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button> 
            </form>

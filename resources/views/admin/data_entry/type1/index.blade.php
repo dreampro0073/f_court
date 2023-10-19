@@ -28,27 +28,26 @@
                     <thead>
                         <tr>
                             <th>Sn</th>
-
-                            <th>Search Year</th>
                             <th>Bank name</th>
                             <th>Through Type</th>
                             <th>Bill Type</th>
                             <th>Contact Number</th>
                             <th>TAT</th>
+                            <th>Satus</th>
                             <th>#</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($legal_opinion_data as $key => $data)
 
-                        <tr class="<?php echo App\Models\User::bgClass($data->status); ?>">
+                        <tr class="<?php echo App\Models\User::bgClass1($data->status); ?>">
                             <td>{{ $key+1}}</td>
-                            <td>{{ $data->ys_name}}</td>
                             <td>{{ $data->bank_name}}</td>
                             <td>{{ $data->through_type}}</td>
                             <td>{{ $data->bill_type}}</td>
                             <td>{{ $data->contact_no}}</td>
                             <td>{{ $data->day}}</td>
+                            <td>{{ $data->show_status}}</td>
                             <td>
                                <a href="{{url('admin/data-entry/type1/add/'.$data->id)}}" class="btn btn-primary btn-sm">Edit</a> 
                                <a href="{{url('admin/data-entry/type1/delete/'.$data->id)}}" onclick="return confirm('Are you sure to Delete?');" class="btn btn-danger btn-sm">Delete</a> 

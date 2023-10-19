@@ -213,3 +213,23 @@ ALTER TABLE `workstation_mutation` CHANGE `applicant _name` `applicant_name` VAR
 //28 june 2023
 
 ALTER TABLE `certified_copy` CHANGE `document_date` `document_date` DATE NULL DEFAULT NULL;
+
+// DIpanshu 18th Oct 2023
+
+
+ALTER TABLE `legal_opinion` CHANGE `contact_no` `contact_no` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL, CHANGE `email` `email` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+ALTER TABLE `legal_notices` CHANGE `contact_no` `contact_no` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL, CHANGE `email` `email` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+ALTER TABLE `agricultural_finance` CHANGE `contact_no` `contact_no` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+ALTER TABLE `billing_types` ADD `status` TINYINT NOT NULL AFTER `bill_type`;
+
+ALTER TABLE `billing_types` CHANGE `status` `status` TINYINT(4) NOT NULL DEFAULT '0';
+ALTER TABLE `through` ADD `status` TINYINT(1) NOT NULL DEFAULT '0' AFTER `through_type`;
+
+ALTER TABLE `days` ADD `status` TINYINT(1) NOT NULL DEFAULT '0' AFTER `day`;
+
+ALTER TABLE `legal_notices` ADD `advance_fees` VARCHAR(255) NULL DEFAULT NULL AFTER `emi_amount`;
+
+ALTER TABLE `legal_notices` ADD `total_fees` VARCHAR(255) NULL DEFAULT NULL AFTER `advance_fees`;

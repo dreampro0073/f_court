@@ -22,6 +22,12 @@ class DataEntryControllerV4 extends Controller {
 
 		$drafting = $sql->get();
 
+		$st = User::showStatusList();
+		
+		foreach ($drafting as $key => $item) {
+			$item->show_status = (isset($item->status))?$st[$item->status]:'';
+		}
+
 		return view('admin.data_entry.type4.index', [
             "sidebar" => "entry",
             "subsidebar" => "entry",
@@ -49,10 +55,10 @@ class DataEntryControllerV4 extends Controller {
 				$emi_ar = explode(',',$draft_data->emi_amount);
 
 				foreach ($emi_ar as $key => $emi) {
-					$draft_data->emi_ar[] = ['e_amount'=>$emi];
+					$draft_data->emi_ar[] = ['emi_amount'=>$emi];
 				}
 			}else{
-				$draft_data->emi_ar[] = ['e_amount'=>''];
+				$draft_data->emi_ar[] = ['emi_amount'=>''];
 			}
 		}
 
@@ -79,7 +85,6 @@ class DataEntryControllerV4 extends Controller {
 			'through_id' => $request->through_id,
 			'name' => $request->name,
 			'drafting_type_id' => $request->drafting_type_id,
-			'contact_no' => $request->contact_no,
 			'billing_type_id' => $request->billing_type_id,
 		];
 
@@ -87,7 +92,6 @@ class DataEntryControllerV4 extends Controller {
 			'through_id' => 'required',
 			'name' => 'required',
 			'drafting_type_id' => 'required',
-			'contact_no' => 'required',
 			'billing_type_id' => 'required',
 		];
 
@@ -122,8 +126,8 @@ class DataEntryControllerV4 extends Controller {
 			if($request->has('emi_ar')){
 				if(sizeof($request->emi_ar) > 0){
 					foreach ($request->emi_ar as $key => $emi_obj) {
-						if(isset($emi_obj['e_amount'])){
-							$emi_str_ar[] = $emi_obj['e_amount'];
+						if(isset($emi_obj['emi_amount'])){
+							$emi_str_ar[] = $emi_obj['emi_amount'];
 						}
 					}
 					$emi_str = implode(',', $emi_str_ar);
@@ -136,8 +140,8 @@ class DataEntryControllerV4 extends Controller {
 				'billing_type_id'=>$billing_type_id,
 				'tat'=>$day_id,
 				'name'=>$request->name,
-				'contact_no'=>$request->contact_no,
-				'email'=>$request->email,
+				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
+				'email'=>$request->has('email')?$request->email:null,
 				'drafting_type_id'=>$drafting_type_id,
 				'tat'=>$day_id,
 				'status'=>$request->status,

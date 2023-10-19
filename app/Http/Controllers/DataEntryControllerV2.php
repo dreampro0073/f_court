@@ -17,6 +17,13 @@ class DataEntryControllerV2 extends Controller {
 	public function index(){
 
 		$legal_notices_data = DB::table('legal_notices')->select('legal_notices.*', 'billing_types.bill_type','banks.bank_name')->leftJoin('billing_types', 'billing_types.id', '=', 'legal_notices.billing_type_id')->leftJoin('banks','banks.id','=','legal_notices.from_id')->get();
+
+		$st = User::showStatusList();
+		
+
+		foreach ($legal_notices_data as $key => $item) {
+			$item->show_status = (isset($item->status))?$st[$item->status]:'';
+		}
 		return view('admin.data_entry.type2.index', [
             "sidebar" => "entry",
             "subsidebar" => "entry",
@@ -76,24 +83,14 @@ class DataEntryControllerV2 extends Controller {
 			'type'=>$request->type,
 			'from_id'=>$request->from_id,
 			'to'=>$request->to,
-			'next_step'=>$request->next_step,
-			'time_given'=>$request->time_given,
-			'amount_involved'=>$request->amount_involved,
-			'billing_type_id'=>$request->billing_type_id,
-			'contact_no'=>$request->contact_no,
-			'email'=>$request->email,
+			
 		];
 
 		$rules = [
 			'type'=>'required',
 			'from_id'=>'required',
 			'to'=>'required',
-			'next_step'=>'required',
-			'time_given'=>'required',
-			'amount_involved'=>'required',
-			'billing_type_id'=>'required',
-			'contact_no'=>'required',
-			'email'=>'required',
+			
 		];
 
 		$validator = Validator::make($cre,$rules);
@@ -104,7 +101,8 @@ class DataEntryControllerV2 extends Controller {
 				$day_id = User::addDays($request->new_day);
 			}
 
-			$billing_type_id = $request->billing_type_id;
+			$billing_type_id = $request->has('billing_type_id')?$request->billing_type_id:0;
+
 
 			if(isset($request->billing_name)){
 				$billing_type_id = User::addBilling($request->billing_name);
@@ -114,7 +112,7 @@ class DataEntryControllerV2 extends Controller {
 			if($request->has('emi_ar')){
 				if(sizeof($request->emi_ar) > 0){
 					foreach ($request->emi_ar as $key => $emi_obj) {
-						$emi_str_ar[] = $emi_obj['e_amount'];
+						$emi_str_ar[] = isset($emi_obj['e_amount'])?$emi_obj['e_amount']:0;
 					}
 					$emi_str = implode(',', $emi_str_ar);
 
@@ -125,15 +123,18 @@ class DataEntryControllerV2 extends Controller {
 				'type'=>$request->type,
 				'from_id'=>$request->from_id,
 				'to'=>$request->to,
-				'next_step'=>$request->next_step,
-				'time_given'=>$request->time_given,
-				'amount_involved'=>$request->amount_involved,
+				'next_step'=>$request->has('next_step')?$request->next_step:null,
+				'time_given'=>$request->has('time_given')?$request->time_given:null,
+				'amount_involved'=>$request->has('amount_involved')?$request->amount_involved:null,
 				'billing_type_id'=>$billing_type_id,
 				'tat'=>$day_id,
-				'contact_no'=>$request->contact_no,
-				'email'=>$request->email,
+				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
+				'email'=>$request->has('email')?$request->email:null,
 				'status'=>$request->status,
+				'total_fees'=>$request->has('total_fees')?$request->total_fees:null,
+				'advance_fees'=>$request->has('advance_fees')?$request->advance_fees:null,
 				'emi_amount'=>$emi_str,
+				
 
 
 			];

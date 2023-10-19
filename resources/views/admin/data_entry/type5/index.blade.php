@@ -13,7 +13,7 @@
 
     <div class="row mb-4">
         <div class="col-md-6">
-            <h1 class="h3 mb-2 text-gray-800">Legal Opinion Data</h1>
+            <h1 class="h3 mb-2 text-gray-800">Mutation</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href="{{url('admin/data-entry/type5/add')}}" class="btn btn-primary">Add</a>
@@ -28,12 +28,13 @@
                             <th>Sn</th>
                             <th>Tehsil Name</th>
                             <th>Name</th>
-                            <th>Contact Number</th>
+                            
                             <th>Date of apply</th>
                             <th>Seller Name</th>
                             <th>Purchaser Name</th>
                             <th>Village</th>
                             <th>Documents</th>
+                            <th>Status</th>
                             <th>#</th>
                         </tr>
                     </thead>
@@ -43,7 +44,6 @@
                             <td>{{$key+1}}</td>
                             <td>{{ $data->tehsil_name}}</td>
                             <td>{{ $data->name}}</td>
-                            <td>{{ $data->contact_no}}</td>
                             <td>{{ date("d-m-Y",strtotime($data->date_of_apply))}}</td>
                             <td>{{ $data->seller_name}}</td>
                             <td>{{ $data->purchaser_name}}</td>
@@ -55,6 +55,8 @@
                                     Certified Copy Available
                                 @endif
                             </td>
+                            <td>{{ $data->show_status}}</td>
+
                             <td>
                                <a href="{{url('admin/data-entry/type5/add/'.$data->id)}}" class="btn btn-primary btn-sm">Edit</a> 
                                <a href="{{url('admin/data-entry/type5/delete/'.$data->id)}}" onclick="return confirm('Are you sure to Delete?');" class="btn btn-danger btn-sm">Delete</a> 

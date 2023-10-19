@@ -10,7 +10,7 @@
 <div class="main" ng-controller="type1Ctrl" ng-init="opinion_id={{$opinion_id}}; addOpinionInit()">
     <div class="row mb-4">
         <div class="col-md-6">
-            <h1 class="h3 mb-2 text-gray-800">Add Opinion</h1>
+            <h1 class="h3 mb-2 text-gray-800">Opinion</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href="{{url('admin/data-entry/type1')}}" class="btn btn-info">Back</a>
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="col-md-4 form-group">
-                        <label>Branch</label>
+                        <label>Bank Branch</label>
                         <input type="text" ng-model="formData.branch_id" class="form-control" required />
                     </div>
                    
@@ -62,7 +62,7 @@
                     
                     <div class="col-md-4 form-group">
                         <label>Billing Type</label>
-                        <select ng-model="formData.billing_type_id" class="form-control" required >
+                        <select ng-model="formData.billing_type_id" class="form-control"  >
                             <option value="">--select--</option>
                             <option ng-repeat="item in billing_types" ng-value=@{{item.id}}>@{{ item.bill_type}}</option>
                             <option value="-1">New</option>
@@ -89,11 +89,11 @@
 
                     <div class="col-md-4 form-group">
                         <label>Contact no</label>
-                        <input type="text" ng-model="formData.contact_no" class="form-control" required />
+                        <input type="text" ng-model="formData.contact_no" class="form-control" />
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Email</label>
-                        <input type="text" ng-model="formData.email" class="form-control" required />
+                        <input type="text" ng-model="formData.email" class="form-control" />
                     </div>
                     <div class="col-md-4 form-group"> 
                         <label>TAT</label>
@@ -118,7 +118,7 @@
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Amount Involve</label>
-                        <input type="text" ng-model="formData.amount" class="form-control" required />
+                        <input type="text" ng-model="formData.amount" class="form-control"  />
                     </div>
 
                 </div>

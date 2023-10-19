@@ -10,7 +10,7 @@
 <div class="main" ng-controller="type4Ctrl" ng-init="draft_id={{$draft_id}}; addDraftInit()">
     <div class="row mb-4">
         <div class="col-md-6">
-            <h1 class="h3 mb-2 text-gray-800">Add Drafting</h1>
+            <h1 class="h3 mb-2 text-gray-800">Drafting</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href="{{url('admin/data-entry/type4')}}" class="btn btn-info">Back</a>
@@ -40,11 +40,11 @@
                     
                     <div class="col-md-4 form-group">
                         <label>Contact no</label>
-                        <input type="text" ng-model="formData.contact_no" class="form-control" required />
+                        <input type="text" ng-model="formData.contact_no" class="form-control"  />
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Email</label>
-                        <input type="text" ng-model="formData.email" class="form-control" required />
+                        <input type="text" ng-model="formData.email" class="form-control"  />
                     </div>
                     
 
@@ -103,19 +103,22 @@
                     
                 </div>
 
-                <h5>Amount EMI</h5>
-                <div class="row mb-2" ng-repeat="emi_obj in formData.emi_ar track by $index">
-                    <div class="col-md-4">
-                        <input type="text" ng-model="emi_obj.e_amount" class="form-control" />
+                <div ng-if="formData.billing_type_id != 1 &&  formData.billing_type_id !='' ">
+                    <h5>Amount EMI</h5>
+                    <div class="row mb-2" ng-repeat="emi_obj in formData.emi_ar track by $index">
+                        <div class="col-md-4">
+                            <input type="text" ng-model="emi_obj.emi_amount" class="form-control" />
+                        </div>
+                        <div class="col-md-3 pt-1">
+                            <button ng-click="remove($index)" type="button" class="btn btn-sm btn-danger">Remove</button>
+                        </div>
+                        
                     </div>
-                    <div class="col-md-3 pt-1">
-                        <button ng-click="remove($index)" type="button" class="btn btn-sm btn-danger">Remove</button>
+                    <div class="pt-2">
+                        <button ng-click="addEMI();" type="button" class="btn btn-sm btn-info">Add Amount</button> 
                     </div>
-                    
                 </div>
-                <div class="pt-2 mb-4">
-                    <button ng-click="addEMI();" type="button" class="btn btn-info">Add Amount</button> 
-                </div>
+                
                 <button type="submit" class="btn btn-primary">Submit</button> 
            </form>
         </div>

@@ -27,10 +27,11 @@
                         <tr>
                             <th>Sn</th>
                             <th>Name</th>
-                            <th>Contact Number</th>
+                            
                             <th>Draft Type</th>
                             <th>Through Type</th>
                             <th>Bill Type</th>
+                            <th>Status</th>
                             <th>#</th>
                         </tr>
                     </thead>
@@ -39,10 +40,10 @@
                         <tr class="<?php echo App\Models\User::bgClass($data->status); ?>">
                             <td>{{ $key+1}}</td>
                             <td>{{ $data->name}}</td>
-                            <td>{{ $data->contact_no}}</td>
                             <td>{{ $data->draft_type}}</td>
                             <td>{{ $data->through_type}}</td>
                             <td>{{ $data->bill_type}}</td>
+                            <td>{{ $data->show_status}}</td>
                             <td>
                                <a href="{{url('admin/data-entry/type4/add/'.$data->id)}}" class="btn btn-primary btn-sm">Edit</a> 
                                <a href="{{url('admin/data-entry/type4/delete/'.$data->id)}}" onclick="return confirm('Are you sure to Delete?');" class="btn btn-danger btn-sm">Delete</a> 

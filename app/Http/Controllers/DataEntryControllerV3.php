@@ -20,6 +20,13 @@ class DataEntryControllerV3 extends Controller {
 		$agriFinSql = User::getAgriFin();
 		$agricultural_finance = $agriFinSql->get();
 
+		$st = User::showStatusList();
+		
+
+		foreach ($agricultural_finance as $key => $item) {
+			$item->show_status = (isset($item->status))?$st[$item->status]:'';
+		}
+
 		// dd($agricultural_finance);
 		return view('admin.data_entry.type3.index', [
             "sidebar" => "entry",
@@ -79,8 +86,8 @@ class DataEntryControllerV3 extends Controller {
 			'bank_comp_id' => $request->bank_comp_id,
 			'through_id' => $request->through_id,
 			'borrower_name' => $request->borrower_name,
-			'amount' => $request->amount,
-			'contact_no' => $request->contact_no,
+			// 'amount' => $request->amount,
+			
 			'billing_type_id' => $request->billing_type_id,
 			'year_search_id' => $request->year_search_id,
 			'type' => $request->type,
@@ -90,8 +97,8 @@ class DataEntryControllerV3 extends Controller {
 			'bank_comp_id' => 'required',
 			'through_id' => 'required',
 			'borrower_name' => 'required',
-			'amount' => 'required',
-			'contact_no' => 'required',
+			// 'amount' => 'required',
+			
 			'year_search_id' => 'required',
 			'billing_type_id' => 'required',
 			'type' => 'required',
@@ -138,15 +145,15 @@ class DataEntryControllerV3 extends Controller {
 				'year_search_id'=>$request->year_search_id,
 				'bank_comp_id'=>$request->bank_comp_id,
 				'borrower_name'=>$request->borrower_name,
-				'amount'=>$request->amount,
-				'contact_no'=>$request->contact_no,
+				'amount'=>$request->has('amount')?$request->amount:null,
 				'type'=>$request->type,
 				'status'=>$request->status,
 				'tat'=>$day_id,
 				'through_id'=>$through_id,
 				'billing_type_id'=>$billing_type_id,
 				'department_id'=>$request->department_id,
-				'email'=>$request->email,
+				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
+				'email'=>$request->has('email')?$request->email:null,
 				'finance_name'=>$request->finance_name,
 				'valution_report'=>$request->valution_report,
 				'emi_amount'=>$emi_str,

@@ -109,8 +109,8 @@ class BtTransactionController extends Controller {
 				'mobile' => $request->mobile,
 				'tat' => $day_id,
 				'status' => $request->status,
-				'contact_no' => $request->contact_no,
-				'email' => $request->email,
+				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
+				'email'=>$request->has('email')?$request->email:null,
 			];
 
 			if($request->has('id')){

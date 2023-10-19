@@ -18,6 +18,12 @@ class DataEntryControllerV6 extends Controller {
 
 		$data = DB::table('court_cases')->select('court_cases.*','banks.bank_name','billing_types.bill_type')->leftJoin('billing_types','billing_types.id','=','court_cases.billing_type_id')->leftJoin('banks','banks.id','=','court_cases.bank_comp_id')->get();
 
+		$st = User::showStatusList();
+		
+		foreach ($data as $key => $item) {
+			$item->show_status = (isset($item->status))?$st[$item->status]:'';
+		}
+
 		return view('admin.data_entry.type6.index', [
             "sidebar" => "entry",
             "subsidebar" => "entry",
@@ -127,8 +133,8 @@ class DataEntryControllerV6 extends Controller {
 				'date' => ($request->date)?date("Y-m-d",strtotime($request->date)):null,
 				'court_name' => $request->court_name,
 				'amount' => $request->amount,
-				'contact_no' => $request->contact_no,
-				'email' => $request->email,
+				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
+				'email'=>$request->has('email')?$request->email:null,
 				'status' => $request->status,
 				'tat' => $day_id,
 				'emi_amount'=>$emi_str,

@@ -22,14 +22,22 @@ class DataEntryControllerV1 extends Controller {
 
 		$legal_opinion_data = $sql->get();
 
+		$st = User::showStatusList();
+
+		foreach ($legal_opinion_data as $key => $item) {
+			$item->show_status = (isset($item->status))?$st[$item->status]:'';
+		}
+
+		// dd($legal_opinion_data);
+
 		
-		if($request->has('exportExcel') && $request->has('exportExcel') == 1){
-            if(sizeof($legal_opinion_data) > 0){
-                include(app_path().'/Excel/legal_opinion.php');
-            }else{
-                return Redirect::back()->with('failure','No data found to export');
-            }
-        }
+		// if($request->has('exportExcel') && $request->has('exportExcel') == 1){
+  //           if(sizeof($legal_opinion_data) > 0){
+  //               include(app_path().'/Excel/legal_opinion.php');
+  //           }else{
+  //               return Redirect::back()->with('failure','No data found to export');
+  //           }
+  //       }
 
 		return view('admin.data_entry.type1.index', [
             "sidebar" => "entry",
@@ -91,10 +99,10 @@ class DataEntryControllerV1 extends Controller {
 			'bank_comp_id'=>$request->bank_comp_id,
 			'through_id'=>$request->through_id,
 			'borrower_name'=>$request->borrower_name,
-			'amount'=>$request->amount,
-			'billing_type_id'=>$request->billing_type_id,
-			'contact_no'=>$request->contact_no,
-			'email'=>$request->email,
+			// 'amount'=>$request->amount,
+			// 'billing_type_id'=>$request->billing_type_id,
+			// 'contact_no'=>$request->contact_no,
+			// 'email'=>$request->email,
 		];
 
 		$rules = [
@@ -102,10 +110,10 @@ class DataEntryControllerV1 extends Controller {
 			'bank_comp_id'=>'required',
 			'through_id'=>'required',
 			'borrower_name'=>'required',
-			'amount'=>'required',
-			'billing_type_id'=>'required',
-			'contact_no'=>'required',
-			'email'=>'required',
+			// 'amount'=>'required',
+			// 'billing_type_id'=>'required',
+			// 'contact_no'=>'required',
+			// 'email'=>'required',
 		];
 
 		$validator = Validator::make($cre,$rules);
@@ -121,7 +129,7 @@ class DataEntryControllerV1 extends Controller {
 			if(isset($request->through_name)){
 				$through_id = User::addThrough($request->through_name);
 			}
-			$billing_type_id = $request->billing_type_id;
+			$billing_type_id = $request->has('billing_type_id')?$request->billing_type_id:0;
 
 			if(isset($request->billing_name)){
 				$billing_type_id = User::addBilling($request->billing_name);
@@ -144,10 +152,10 @@ class DataEntryControllerV1 extends Controller {
 				'year_search_id'=>$request->year_search_id,
 				'bank_comp_id'=>$request->bank_comp_id,
 				'borrower_name'=>$request->borrower_name,
-				'amount'=>$request->amount,
+				'amount'=>$request->has('amount')?$request->amount:null,
 				'billing_type_id'=>$billing_type_id,
-				'contact_no'=>$request->contact_no,
-				'email'=>$request->email,
+				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
+				'email'=>$request->has('email')?$request->email:null,
 				'through_id'=>$through_id,
 				'tat'=>$day_id,
 				'department_id'=>$request->department_id,

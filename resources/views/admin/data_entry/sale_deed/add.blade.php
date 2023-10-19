@@ -137,11 +137,11 @@
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Contact no</label>
-                        <input type="text" ng-model="formData.contact_no" class="form-control" required />
+                        <input type="text" ng-model="formData.contact_no" class="form-control"  />
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Email</label>
-                        <input type="email" ng-model="formData.email" class="form-control" required />
+                        <input type="email" ng-model="formData.email" class="form-control"  />
                     </div>
 
                     

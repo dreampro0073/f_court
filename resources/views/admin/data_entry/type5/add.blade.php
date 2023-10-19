@@ -10,7 +10,7 @@
 <div class="main" ng-controller="type5Ctrl" ng-init="mutation_id={{$mutation_id}}; Init()">
     <div class="row mb-4">
         <div class="col-md-6">
-            <h1 class="h3 mb-2 text-gray-800">Add Mutation</h1>
+            <h1 class="h3 mb-2 text-gray-800">Mutation</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href="{{url('admin/data-entry/type5')}}" class="btn btn-info">Back</a>
@@ -42,11 +42,11 @@
 
                     <div class="col-md-4 form-group">
                         <label>Contact no</label>
-                        <input type="text" ng-model="formData.contact_no" class="form-control" required />
+                        <input type="text" ng-model="formData.contact_no" class="form-control"  />
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Email</label>
-                        <input type="text" ng-model="formData.email" class="form-control" required />
+                        <input type="text" ng-model="formData.email" class="form-control"  />
                     </div>
 
                     <div class="col-md-4 form-group">

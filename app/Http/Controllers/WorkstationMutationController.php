@@ -105,8 +105,8 @@ class WorkstationMutationController extends Controller {
 				'applicant_name' => $request->applicant_name,
 				'father_name' => $request->father_name,
 				'status' => $request->status,
-				'contact_no' => $request->contact_no,
-				'email' => $request->email,
+				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
+				'email'=>$request->has('email')?$request->email:null,
 			];
 
 			if($request->has('id')){

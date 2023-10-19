@@ -54,7 +54,7 @@ class User extends Authenticatable {
     
     public static function getThrough(){
 
-        $through = DB::table('through')->get();
+        $through = DB::table('through')->where('status',0)->get();
 
         return $through;
 
@@ -69,7 +69,7 @@ class User extends Authenticatable {
     
     public static function getBillingTypes(){
 
-        $billing_types = DB::table('billing_types')->get();
+        $billing_types = DB::table('billing_types')->where('status',0)->get();
 
         return $billing_types;
 
@@ -101,7 +101,7 @@ class User extends Authenticatable {
     
     public static function getDays(){
 
-        $days = DB::table('days')->orderBy('day', 'ASC')->get();
+        $days = DB::table('days')->where('status',0)->orderBy('day', 'ASC')->get();
 
         return $days;
 
@@ -185,6 +185,10 @@ class User extends Authenticatable {
 
         return $ar;
     }
+
+    public static function showStatusList(){
+        return [1=>'Ready',2=>"Under Process",3=>"Defected / Rejected"];
+    }
     
     public static function statusList2(){
         $ar = [];
@@ -214,6 +218,7 @@ class User extends Authenticatable {
         $day_id = DB::table('days')->insertGetId([
             'day'=>$name,
             'created_at'=>date('Y-m-d H:i:s'),
+            'status' => 1,
         ]);
 
         return $day_id;
@@ -233,6 +238,7 @@ class User extends Authenticatable {
     
         $through_id = DB::table('through')->insertGetId([
             'through_type'=>$name,
+            'status' => 1,
             // 'created_at'=>date('Y-m-d H:i:s'),
         ]);
 
@@ -263,7 +269,7 @@ class User extends Authenticatable {
     
         $billing_type_id = DB::table('billing_types')->insertGetId([
             'bill_type'=>$name,
-            
+            'status' => 1,
         ]);
 
         return $billing_type_id;
@@ -323,6 +329,28 @@ class User extends Authenticatable {
                 $bgClass = 'white';
                 break;
 
+            default:
+                $bgClass = 'white';
+                break;
+        }
+
+        return $bgClass;
+    }
+
+    public static function bgClass1($status){
+        $bgClass = '';
+        switch ($status) {
+            case 1:
+                $bgClass = 'green';
+                break;
+
+            case 2:
+                $bgClass = 'red';
+                break;
+
+            case 3:
+                $bgClass = 'blue';
+                break;
             default:
                 $bgClass = 'white';
                 break;

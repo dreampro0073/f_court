@@ -144,8 +144,8 @@ class CertifiedCopyController extends Controller {
 				'through_id' => $through_id,
 				'status' => $request->status,
 				'docs_received_on_dated' => date('Y-m-d', strtotime($request->docs_received_on_dated)),
-				'contact_no' => $request->contact_no,
-				'email' => $request->email,
+				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
+				'email'=>$request->has('email')?$request->email:null,
 
 			];
 

@@ -1,8 +1,8 @@
 app.controller('type5Ctrl', function($scope , $http, $timeout , DBService) {
     $scope.formData = {
-        emi_ar: [{emi_amount:''}],
+        emi_ar: [{e_amount:''}],
     }
-    $scope.emi_obj = {emi_amount:''};
+    $scope.emi_obj = {e_amount:''};
     
     $scope.banks = [];
     $scope.years = [];
@@ -33,7 +33,10 @@ app.controller('type5Ctrl', function($scope , $http, $timeout , DBService) {
         DBService.postCall({mutation_id:$scope.mutation_id}, '/api/data-entry/type5/init').then((data) => {
             
             if(data.success) {
-                $scope.formData = data.mutation; 
+                if(data.mutation){
+                    $scope.formData = data.mutation; 
+
+                }
                 $scope.tehsils = data.tehsils; 
                 $scope.villages = data.villages; 
                 $scope.days = data.days; 
@@ -54,6 +57,7 @@ app.controller('type5Ctrl', function($scope , $http, $timeout , DBService) {
         });
     }
     $scope.addEMI = () => {
+        // console.log('hasjahjshja');
         $scope.formData.emi_ar.push(JSON.parse(JSON.stringify($scope.emi_obj)));
 
     }

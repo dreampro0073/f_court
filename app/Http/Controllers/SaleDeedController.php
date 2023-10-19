@@ -152,8 +152,8 @@ class SaleDeedController extends Controller {
 				'through_id' => $through_id,
 				'document_type_id' => $document_type_id,
 				'status' => $request->status,
-				'contact_no' => $request->contact_no,
-				'email' => $request->email,
+				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
+				'email'=>$request->has('email')?$request->email:null,
 				
 			];
 

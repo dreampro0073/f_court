@@ -7,13 +7,13 @@
 
 @section('main')
 
-<div class="main" ng-controller="dataEntryCtrl" ng-init="init();">
+<div class="main" ng-controller="type6Ctrl" ng-init="init();">
 
     @include('admin.data_entry.menu')
 
     <div class="row mb-4">
         <div class="col-md-6">
-            <h1 class="h3 mb-2 text-gray-800">All Data Entry</h1>
+            <h1 class="h3 mb-2 text-gray-800">Court Case</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href="{{url('admin/data-entry/type6/add')}}" class="btn btn-primary">Add</a>
@@ -33,6 +33,7 @@
                             <th>Case Name</th>
                             <th>Case No.</th>
                             <th>Bill Type</th>
+                            <th>Status</th>
                             
                             <th>#</th>
                         </tr>
@@ -47,6 +48,7 @@
                             <td>{{$item->case_name_1}} vs {{$item->case_name_2}}</td>
                             <td>{{$item->case_no_1}} vs {{$item->case_no_2}}</td>
                             <td>{{$item->bill_type}} vs {{$item->case_no_2}}</td>
+                            <td>{{$item->show_status}}</td>
                             <td>
                                 <a href="{{url('admin/data-entry/type6/add/'.$item->id)}}" class="btn btn-sm btn-warning">Edit</a>
                             </td>
@@ -64,6 +66,8 @@
 @endsection
 
 @section('footer_scripts')
+    <?php $version = "1.2.3"; ?>
+    <script type="text/javascript" src="{{url('assets/scripts/core/type6_ctrl.js?v='.$version)}}" ></script>
    
     
 @endsection
