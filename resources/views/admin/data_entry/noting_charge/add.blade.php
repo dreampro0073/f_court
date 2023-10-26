@@ -1,16 +1,18 @@
 @extends('admin.layout')
-
-
+ 
 @section('header_scripts')
   
-
-@endsection
+@endsection 
 
 @section('main')
 <div class="main" ng-controller="notingCtrl" ng-init="noting_id={{$noting_id}}; add()">
     <div class="row mb-4">
         <div class="col-md-6">
+<<<<<<< HEAD
             <h1 class="h3 mb-2 text-gray-800">Add</h1>
+=======
+            <h1 class="h3 mb-2 text-gray-800">Noting of Bank Charge</h1>
+>>>>>>> bd1b67463ae943840f4f2eafeab04da27a70c8cf
         </div>
         <div class="col-md-6 text-right">
             <a href="{{url('admin/data-entry/noting-charge')}}" class="btn btn-info">Back</a>
@@ -28,6 +30,10 @@
                     <div class="col-md-4 form-group">
                         <label>Bank</label>
                         <selectize placeholder='Select a bank' config="selectConfig" options="banks" ng-model="formData.bank_comp_id" required></selectize>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>Bnak Branch</label>
+                        <input type="text" ng-model="formData.bank_branch" class="form-control" />
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Department</label>
@@ -119,17 +125,6 @@
                             <option ng-repeat="item in status_ar" value=@{{item.value}}>@{{ item.label}}</option>
                            
                         </select> 
-                    </div>
-                    
-                    
-
-                    <div class="col-md-4 form-group">
-                        <label>Contact no</label>
-                        <input type="text" ng-model="formData.contact_no" class="form-control"  />
-                    </div>
-                    <div class="col-md-4 form-group">
-                        <label>Email</label>
-                        <input type="email" ng-model="formData.email" class="form-control"  />
                     </div>
                     
                 </div>

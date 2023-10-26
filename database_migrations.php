@@ -239,3 +239,13 @@ ALTER TABLE `legal_notices` ADD `total_fees` VARCHAR(255) NULL DEFAULT NULL AFTE
 
 
 ALTER TABLE `certified_copy` ADD `branch_name` VARCHAR(255) NULL DEFAULT NULL AFTER `bank_comp_id`;
+
+// DIpanshu 19th Oct 2023
+
+ALTER TABLE `court_cases` ADD `client_name` VARCHAR(255) NULL DEFAULT NULL AFTER `id`;
+ALTER TABLE `court_cases` CHANGE `bank_comp_id` `bank_comp_id` INT(11) NULL DEFAULT NULL;
+ALTER TABLE `court_cases` ADD `next_date` DATE NULL DEFAULT NULL AFTER `date`;
+ALTER TABLE `court_cases` ADD `stage` VARCHAR(255) NULL DEFAULT NULL AFTER `status`;
+ALTER TABLE `noting_charge` ADD `bank_branch` VARCHAR(255) NULL DEFAULT NULL AFTER `bank_comp_id`;
+
+
