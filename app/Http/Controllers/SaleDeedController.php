@@ -26,24 +26,22 @@ class SaleDeedController extends Controller {
 		->get();
 		// dd($data);
 
-		$status_ar = User::statusList2();
+		
 		$sro_ar = User::SROList();
+		$st = User::showStatusList2();
+
 
 		foreach ($data as $value) {
-			$value->date = $value->date ? date('d-m-Y', strtotime($value->date)): '';
-			$value->document_date = $value->document_date ? date('d-m-Y', strtotime($value->document_date)): null;
-			$value->submitted_date = $value->submitted_date ? date('d-m-Y', strtotime($value->submitted_date)): null;
+			$value->date = ($value->date) ? date('d-m-Y', strtotime($value->date)): '';
+			$value->document_date = ($value->document_date )? date('d-m-Y', strtotime($value->document_date)): null;
+			$value->submitted_date = ($value->submitted_date )? date('d-m-Y', strtotime($value->submitted_date)): null;
 			foreach ($sro_ar as $sro) {
 				if($value->sro == $sro['value'] ){
 					$value->sro = $sro['label'];
 				}
 			}
-			// foreach ($status_ar as $status) {
-			// 	if($value->status == $status['value'] ){
-
-			// 		$value->status = $status['label'];
-			// 	}
-			// }
+			$value->show_status = (isset($value->status))?$st[$value->status]:'';
+			
 		}
 
 		
@@ -136,18 +134,15 @@ class SaleDeedController extends Controller {
 			}
 
 			$data = [
-				'date' => date('Y-m-d', strtotime($request->date)),
+				'date' => ($request->date)? date('Y-m-d', strtotime($request->date)):null,
 				'bank_comp_id' => $request->bank_comp_id,
-				'financed_by' => $request->financed_by,
 				'department_id' => $request->department_id,
-				
 				'first_party' => $request->first_party,
 				'second_party' => $request->second_party,
 				'document_no' => $request->document_no,
-				'document_date' => date('Y-m-d', strtotime($request->document_date)),
-				'submitted_date' => date('Y-m-d', strtotime($request->submitted_date)),
+				'document_date' => ($request->document_date)?  date('Y-m-d', strtotime($request->document_date)) :null,
+				'submitted_date' => ($request->submitted_date) ? date('Y-m-d', strtotime($request->submitted_date)):null,
 				'sro' => $request->sro,
-				'tat' => $day_id,
 				'sro_office' => $sro_office,
 				'through_id' => $through_id,
 				'document_type_id' => $document_type_id,

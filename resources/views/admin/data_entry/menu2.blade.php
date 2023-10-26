@@ -6,7 +6,7 @@
         <a class="nav-link @if($tab == 'certified-copy') active @endif" href="{{url('admin/data-entry/certified-copy')}}" >Certified Copy</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link @if($tab == 'workstation-mutation') active @endif" href="{{url('admin/data-entry/workstation-mutation')}}">Workstation Mutation</a>
+        <a class="nav-link @if($tab == 'workstation-mutation') active @endif" href="{{url('admin/data-entry/workstation-mutation')}}">Mutation</a>
     </li>
     <li class="nav-item">
         <a class="nav-link @if($tab == 'sale-deed') active @endif"  href="{{url('admin/data-entry/sale-deed')}}" >Sale Deed</a>

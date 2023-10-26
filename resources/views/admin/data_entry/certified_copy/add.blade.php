@@ -30,6 +30,10 @@
                         <selectize placeholder='Select a bank' config="selectConfig" options="banks" ng-model="formData.bank_comp_id" required></selectize>
 
                     </div>
+                    <div class="col-md-4 form-group">
+                        <label>Bank Branch</label>
+                        <input type="text" ng-model="formData.branch_name" class="form-control" required />
+                    </div>
                      <div class="col-md-4 form-group">
                         <label>Department</label>
                         <input type="text" ng-model="formData.department" class="form-control" required />

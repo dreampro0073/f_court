@@ -31,6 +31,7 @@
                             <th>Through Type</th>
                            
                             <th>TAT</th>
+                            <th>Status</th>
                             
                             <th>#</th>
                         </tr>
@@ -45,6 +46,8 @@
                             <td>{{ $item->through_type}}</td>
                             
                             <td>{{ $item->day}}</td>
+                            <td>{{ $item->show_status}}</td>
+                            
                             
                             <td>
                                <a href="{{url('admin/data-entry/noting-charge/add/'.$item->id)}}" class="btn btn-primary btn-sm">Edit</a> 

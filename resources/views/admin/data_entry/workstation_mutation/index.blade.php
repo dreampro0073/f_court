@@ -12,7 +12,7 @@
 
     <div class="row mb-4">
         <div class="col-md-6">
-            <h1 class="h3 mb-2 text-gray-800">Workstation Mutation</h1>
+            <h1 class="h3 mb-2 text-gray-800">Mutation</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href="{{url('admin/data-entry/workstation-mutation/add')}}" class="btn btn-primary">Add</a>
@@ -33,6 +33,7 @@
                             <th>Village</th>
                             <th>Expect Completion Date</th>
                             <th>Completion Date</th>
+                            <th>Status</th>
                            
                             <th>#</th>
                         </tr>
@@ -49,6 +50,7 @@
                             <td>{{$item->village_name}}</td>
                             <td>{{$item->expect_completion_date}}</td>
                             <td>{{$item->completion_date}}</td>
+                            <td>{{$item->show_status}}</td>
                            
                             <td>
                                <a href="{{url('admin/data-entry/workstation-mutation/add/'.$item->id)}}" class="btn btn-primary btn-sm">Edit</a> 

@@ -24,6 +24,7 @@ class DataEntryControllerV5 extends Controller {
 		
 		foreach ($mutations as $key => $item) {
 			$item->show_status = (isset($item->status))?$st[$item->status]:'';
+			$item->date_of_apply = ($item->date_of_apply)?date("d-m-Y",strtotime($item->date_of_apply)):null;
 		}
 
 		return view('admin.data_entry.type5.index', [
@@ -144,7 +145,7 @@ class DataEntryControllerV5 extends Controller {
 				'name'=>$request->name,
 				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
 				'email'=>$request->has('email')?$request->email:null,
-				'date_of_apply'=>date("Y-m-d",strtotime($request->date_of_apply)),
+				'date_of_apply'=>$request->date_of_apply ? date("Y-m-d",strtotime($request->date_of_apply)):null,
 				'seller_name'=>$request->seller_name,
 				'purchaser_name'=>$request->purchaser_name,
 				'village_id'=>$village_id,

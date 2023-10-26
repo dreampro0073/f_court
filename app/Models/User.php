@@ -199,6 +199,12 @@ class User extends Authenticatable {
 
         return $ar;
     }
+
+    public static function showStatusList2(){
+        return [1=>'Collected',2=>"Pending",3=>"In Defect","4"=>"Submitted /Handover"];
+        
+
+    }
     
     public static function SROList(){
         $ar = [];

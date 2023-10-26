@@ -19,11 +19,14 @@ class WorkstationMutationController extends Controller {
 		$status_ar = User::statusList();
 		$data = DB::table('workstation_mutation')->select('workstation_mutation.*','villages.village_name')->leftJoin('villages','villages.id','=','workstation_mutation.village_id')->get();
 
+		$st = User::showStatusList();
+
+
 		foreach ($data as $value) {
-			$value->date = $value->date ? date('d-m-Y', strtotime($value->date)): '';
-			$value->date_of_apply = $value->date_of_apply ? date('d-m-Y', strtotime($value->date_of_apply)): null;
-			$value->next_date = $value->next_date ? date('d-m-Y', strtotime($value->next_date)): null;
-			$value->expect_completion_date = $value->expect_completion_date ? date('d-m-Y', strtotime($value->expect_completion_date)): null;
+			$value->date = ($value->date) ? date('d-m-Y', strtotime($value->date)): '';
+			$value->date_of_apply = ($value->date_of_apply )? date('d-m-Y', strtotime($value->date_of_apply)): null;
+			$value->next_date =( $value->next_date) ? date('d-m-Y', strtotime($value->next_date)): null;
+			$value->expect_completion_date =( $value->expect_completion_date) ? date('d-m-Y', strtotime($value->expect_completion_date)): null;
 			$value->completion_date = $value->completion_date ? date('d-m-Y', strtotime($value->completion_date)): null;
 			
 			// foreach ($status_ar as $status) {
@@ -32,6 +35,9 @@ class WorkstationMutationController extends Controller {
 			// 		$value->status = $status['label'];
 			// 	}
 			// }
+			$value->show_status = (isset($value->status))?$st[$value->status]:'';		
+			
+
 		}
 
 		
@@ -96,11 +102,11 @@ class WorkstationMutationController extends Controller {
 			}
 
 			$data = [
-				'date' => date('Y-m-d', strtotime($request->date)),
-				'date_of_apply' => date('Y-m-d', strtotime($request->date_of_apply)),
-				'next_date' => date('Y-m-d', strtotime($request->next_date)),
-				'expect_completion_date' => date('Y-m-d', strtotime($request->expect_completion_date)),
-				'completion_date' => date('Y-m-d', strtotime($request->completion_date)),
+				'date' => ($request->date)?date('Y-m-d', strtotime($request->date)):null,
+				'date_of_apply' => ($request->date_of_apply)?date('Y-m-d', strtotime($request->date_of_apply)):null,
+				'next_date' =>($request->next_date)? date('Y-m-d', strtotime($request->next_date)):null,
+				'expect_completion_date' => ($request->expect_completion_date)?date('Y-m-d', strtotime($request->expect_completion_date)):null,
+				'completion_date' =>$request->completion_date ? date('Y-m-d', strtotime($request->completion_date)):null,
 				'village_id' => $village_id,
 				'applicant_name' => $request->applicant_name,
 				'father_name' => $request->father_name,

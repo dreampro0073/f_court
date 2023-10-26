@@ -27,24 +27,25 @@ class CertifiedCopyController extends Controller {
 		->leftJoin('tehsil', 'tehsil.id', '=', 'certified_copy.tehsil_id')
 		->get();
 
-		// dd($data);
+		$st = User::showStatusList();
 
+
+		// dd($st);
 		foreach ($data as $value) {
-			$value->date = $value->date ? date('d-m-Y', strtotime($value->date)): '';
-			$value->document_date = $value->document_date ? date('d-m-Y', strtotime($value->document_date)): null;
+			$value->date = ($value->date) ? date('d-m-Y', strtotime($value->date)): '';
+			$value->document_date = ($value->document_date) ? date('d-m-Y', strtotime($value->document_date)): null;
 			$value->docs_received_on_dated = $value->docs_received_on_dated ? date('d-m-Y', strtotime($value->docs_received_on_dated)): null;
 			foreach ($sro_ar as $sro) {
 				if($value->sro == $sro['value'] ){
 					$value->sro = $sro['label'];
 				}
 			}
-			// foreach ($status_ar as $status) {
-			// 	if($value->status == $status['value'] ){
 
-			// 		$value->status = $status['label'];
-			// 	}
-			// }
+			$value->show_status = (isset($value->status))?$st[$value->status]:'';		
 		}
+
+		// dd($data);
+
 		
 		return view('admin.data_entry.certified_copy.index', [
             "sidebar" => "entry2",
@@ -98,12 +99,12 @@ class CertifiedCopyController extends Controller {
 	public function store(Request $request){
 
 		$cre = [
-			'bank_comp_id' => $request->bank_comp_id,
+			// 'bank_comp_id' => $request->bank_comp_id,
 			
 		];
 
 		$rules = [
-			'bank_comp_id' => 'required',
+			// 'bank_comp_id' => 'required',
 			
 		];
 
@@ -130,20 +131,21 @@ class CertifiedCopyController extends Controller {
 
 
 			$data = [
-				'date' => date('Y-m-d', strtotime($request->date)),
+				'date' =>($request->date) ?date('Y-m-d', strtotime($request->date)):null,
 				'bank_comp_id' => $request->bank_comp_id,
+				'branch_name' => $request->branch_name,
 				'department' => $request->department,
 				'file_name' => $request->file_name,
 				'first_party' => $request->first_party,
 				'second_party' => $request->second_party,
 				'document_no' => $request->document_no,
-				'document_date' => date('Y-m-d', strtotime($request->document_date)),
+				'document_date' => ($request->document_date)?date('Y-m-d', strtotime($request->document_date)):null,
 				'sro' => $request->sro,
 				'tehsil_id' => $tehsil_id,
 				'tat' => $day_id,
 				'through_id' => $through_id,
 				'status' => $request->status,
-				'docs_received_on_dated' => date('Y-m-d', strtotime($request->docs_received_on_dated)),
+				
 				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
 				'email'=>$request->has('email')?$request->email:null,
 

@@ -233,3 +233,9 @@ ALTER TABLE `days` ADD `status` TINYINT(1) NOT NULL DEFAULT '0' AFTER `day`;
 ALTER TABLE `legal_notices` ADD `advance_fees` VARCHAR(255) NULL DEFAULT NULL AFTER `emi_amount`;
 
 ALTER TABLE `legal_notices` ADD `total_fees` VARCHAR(255) NULL DEFAULT NULL AFTER `advance_fees`;
+
+//Dipanshu Chauhan 26th 
+
+
+
+ALTER TABLE `certified_copy` ADD `branch_name` VARCHAR(255) NULL DEFAULT NULL AFTER `bank_comp_id`;

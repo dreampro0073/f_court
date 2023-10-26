@@ -28,7 +28,8 @@
                             <th>Sn.</th>
                             <th>Date</th>
                             <th>Bank</th>
-                            <th>Department</th>
+                            <th>Branch Name</th>
+                            
                             <th>Through Type</th>
                             <th>File Name</th>
                             <th>First Party</th>
@@ -40,6 +41,7 @@
                             <th>TAT</th>
                            
                             <th>Document Recived Date</th>
+                            <th>Status</th>
                             <th>#</th>
                         </tr>
                     </thead>
@@ -48,20 +50,21 @@
                         <tr class="<?php echo App\Models\User::bgClass($item->status); ?>">
 
                             <td>{{$key+1}}</td>
-                            <td>{{date('d-m-Y', strtotime($item->date))}}</td>
+                            <td>{{$item->date}}</td>
                             <td>{{$item->bank_name}}</td>
-                            <td>{{$item->department}}</td>
+                            <td>{{$item->branch_name}}</td>
                             <td>{{$item->through_type}}</td>
                             <td>{{$item->file_name}}</td>
                             <td>{{$item->first_party}}</td>
                             <td>{{$item->second_party}}</td>
                             <td>{{$item->document_no}}</td>
-                            <td>{{date('d-m-Y', strtotime($item->document_date))}}</td>
+                            <td>{{$item->document_date}}</td>
                             <td>{{$item->sro}}</td>
                             <td>{{$item->tehsil_name}}</td>
                             <td>{{$item->day}}</td>
                            
-                            <td>{{date('d-m-Y', strtotime($item->docs_received_on_dated))}}</td>
+                            <td>{{$item->docs_received_on_dated}}</td>
+                            <td>{{$item->show_status}}</td>
 
                             <td>
                                <a href="{{url('admin/data-entry/certified-copy/add/'.$item->id)}}" class="btn btn-primary btn-sm">Edit</a> 

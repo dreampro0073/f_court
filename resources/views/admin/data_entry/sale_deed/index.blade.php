@@ -27,7 +27,6 @@
                         <tr>
                             <th>Sn</th>
                             <th>Date</th>
-                            <th>Financed By</th>
                             <th>Bank</th>
                             <th>Department</th>
                             <th>Through</th>
@@ -49,7 +48,6 @@
                         <tr class="<?php echo App\Models\User::bgClass2($item->status); ?>">
                             <td>{{$key+1}}</td>
                             <td>{{$item->date}}</td>
-                            <td>{{$item->financed_by}}</td>
                             <td>{{$item->bank_name}}</td>
                             <td>{{$item->department_id}}</td>
                             <td>{{$item->through_type}}</td>
@@ -61,7 +59,7 @@
                             <td>{{$item->sro}}</td>
                             <td>{{$item->tehsil_name}}</td>
                             <td>{{$item->tat}}</td>
-                            <td>{{$item->status}}</td>
+                            <td>{{$item->show_status}}</td>
                             <td>{{$item->submitted_date}}</td>
                             
                             <td>

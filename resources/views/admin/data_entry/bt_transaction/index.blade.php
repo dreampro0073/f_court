@@ -27,7 +27,6 @@
                         <tr>
                             <th>Sn</th>
                             <th>Bank</th>
-                            <th>Department</th>
                             <th>Submited To</th>
                             <th>Transaction Date</th>
                             <th>Case Name</th>
@@ -46,15 +45,14 @@
                         <tr class="<?php echo App\Models\User::bgClass2($item->status); ?>">
                             <td>{{$key+1}}</td>
                             <td>{{$item->bank_name}}</td>
-                            <td>{{$item->department}}</td>
                             <td>{{$item->submitted_to}}</td>
-                            <td>{{date('d-m-Y', strtotime($item->transaction_date))}}</td>
+                            <td>{{$item->transaction_date}}</td>
                             <td>{{$item->case_name}}</td>
                             <td>{{$item->mobile}}</td>
-                            <td>{{date('d-m-Y', strtotime($item->cheque_deposited_date))}}</td>
-                            <td>{{date('d-m-Y', strtotime($item->document_collection_date))}}</td>
-                            <td>{{date('d-m-Y', strtotime($item->handover_date))}}</td>
-                            <td>{{$item->status}}</td>
+                            <td>{{$item->cheque_deposited_date}}</td>
+                            <td>{{$item->document_collection_date}}</td>
+                            <td>{{$item->handover_date}}</td>
+                            <td>{{$item->show_status}}</td>
                             <td>{{$item->day}}</td>
                             <td>
                                <a href="{{url('admin/data-entry/bt-transaction/add/'.$item->id)}}" class="btn btn-primary btn-sm">Edit</a> 

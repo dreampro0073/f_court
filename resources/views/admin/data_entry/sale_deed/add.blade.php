@@ -10,7 +10,7 @@
 <div class="main" ng-controller="saleCtrl" ng-init="sale_id={{$sale_id}}; add()">
     <div class="row mb-4">
         <div class="col-md-6">
-            <h1 class="h3 mb-2 text-gray-800">Add Sale DEED</h1>
+            <h1 class="h3 mb-2 text-gray-800">Add</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href="{{url('admin/data-entry/sale-deed')}}" class="btn btn-info">Back</a>
@@ -27,10 +27,9 @@
                         <input type="text" ng-model="formData.date" class="form-control datepicker1" />
                     </div>
 
-                    
-                    
+                
                     <div class="col-md-4 form-group">
-                        <label>Financed by</label>
+                        <label>Bank Name</label>
                         <selectize placeholder='Select a bank' config="selectConfig" options="banks" ng-model="formData.bank_comp_id" required></selectize>
 
                     </div>
@@ -109,15 +108,7 @@
                     </div>
 
 
-                    <div class="col-md-4 form-group"> 
-                        <label>TAT</label>
-                        <select ng-model="formData.tat" class="form-control" required convert-to-number >
-                            <option value="">--select--</option>
-                            <option ng-repeat="item in days" value=@{{item.id}}>@{{ item.day}}</option>
-                            <option value=-1>New</option>
-                        </select> 
-                    </div>
-                    
+                   
                     <div class="col-md-4 form-group" ng-if="formData.tat == -1"> 
                         <label>Number of days</label>
                         <input type="text" placeholder="10 days" ng-model="formData.new_day" class="form-control" required />

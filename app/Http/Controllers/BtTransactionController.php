@@ -24,6 +24,9 @@ class BtTransactionController extends Controller {
 		->leftJoin('days', 'days.id', '=', 'transactions.tat')
 		->get();
 
+		$st = User::showStatusList2();
+
+
 		foreach ($data as $value) {
 			$value->transaction_date = $value->transaction_date ? date('d-m-Y', strtotime($value->transaction_date)): '';
 			$value->cheque_deposited_date = $value->cheque_deposited_date ? date('d-m-Y', strtotime($value->cheque_deposited_date)): '';
@@ -35,6 +38,9 @@ class BtTransactionController extends Controller {
 			// 		$value->status = $status['label'];
 			// 	}
 			// }
+
+			$value->show_status = (isset($value->status))?$st[$value->status]:'';
+			
 		}
 	
 		return view('admin.data_entry.bt_transaction.index', [
@@ -101,10 +107,10 @@ class BtTransactionController extends Controller {
 				'bank_comp_id' => $request->bank_comp_id,
 				'department' => $request->department,
 				'submitted_to' => $request->submitted_to,
-				'transaction_date' => date('Y-m-d', strtotime($request->transaction_date)),
-				'cheque_deposited_date' => date('Y-m-d', strtotime($request->cheque_deposited_date)),
-				'document_collection_date' => date('Y-m-d', strtotime($request->document_collection_date)),
-				'handover_date' => date('Y-m-d', strtotime($request->handover_date)),
+				'transaction_date' => ($request->transaction_date)?date('Y-m-d', strtotime($request->transaction_date)):null,
+				'cheque_deposited_date' => ($request->cheque_deposited_date)?date('Y-m-d', strtotime($request->cheque_deposited_date)):null,
+				'document_collection_date' =>( $request->document_collection_date)?date('Y-m-d', strtotime($request->document_collection_date)):null,
+				'handover_date' => ($request->handover_date)?date('Y-m-d', strtotime($request->handover_date)):null,
 				'case_name' => $request->case_name,
 				'mobile' => $request->mobile,
 				'tat' => $day_id,

@@ -10,7 +10,7 @@
 <div class="main" ng-controller="workCtrl" ng-init="work_id={{$work_id}}; add()">
     <div class="row mb-4">
         <div class="col-md-6">
-            <h1 class="h3 mb-2 text-gray-800">Add Workstation Mutation</h1>
+            <h1 class="h3 mb-2 text-gray-800">Mutation</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href="{{url('admin/data-entry/workstation-mutation')}}" class="btn btn-info">Back</a>

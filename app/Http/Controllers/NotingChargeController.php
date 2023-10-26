@@ -18,13 +18,16 @@ class NotingChargeController extends Controller {
 		$status_ar = User::statusList();
 
 		$data = DB::table('noting_charge')->select('noting_charge.*','banks.bank_name','through.through_type','villages.village_name','tehsil.tehsil_name','days.day')->leftJoin('banks','banks.id','=','noting_charge.bank_comp_id')->leftJoin('through','through.id','=','noting_charge.through_id')->leftJoin('days','days.id','=','noting_charge.tat')->leftJoin('villages','villages.id','=','noting_charge.village_id')->leftJoin('tehsil','tehsil.id','=','noting_charge.tehsil_id')->get();
-		// foreach ($data as $value) {
-		// 	foreach ($status_ar as $status) {
-		// 		if($value->status == $status['value'] ){
-		// 			$value->status = $status['label'];
-		// 		}
-		// 	}
-		// }
+
+
+		$st = User::showStatusList();
+
+		foreach ($data as $item) {
+			foreach ($status_ar as $status) {
+				$item->show_status = (isset($item->status))?$st[$item->status]:'';
+				
+			}
+		}
 
 
 		
