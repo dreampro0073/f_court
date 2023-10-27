@@ -54,6 +54,15 @@
         </a>
     </li>
     @endif
+
+    <li class="nav-item">
+        <a class="nav-link {{($sidebar =='banks' && $subsidebar == 'banks')?'active':''}}"  href="{{url('admin/banks')}}">
+            <i class="fas fa-university"></i>
+            <span>Banks</span>
+        </a>
+    </li>
+
+
     <li class="nav-item">
         <a class="nav-link {{($sidebar =='attendance' && $subsidebar == 'attendance')?'active':''}}"  href="{{url('admin/attendance')}}">
             <i class="fa fa-compress-alt"></i>
