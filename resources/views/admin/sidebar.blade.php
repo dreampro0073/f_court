@@ -32,7 +32,7 @@
             <span>Data Entry 2</span>
         </a>
     </li>
- 
+    @if(Auth::user()->privilege == 1)
     <li class="nav-item">
         <a class="nav-link {{($sidebar =='bill-books' && $subsidebar == 'bill-books')?'active':''}}"  href="{{url('admin/bill-books/type1')}}">
             <i class="fas fa-fw fa-file"></i>
@@ -69,6 +69,7 @@
             <span>Attendance</span>
         </a>
     </li>
+    @endif
     <li class="nav-item">
         <a class="nav-link" href="{{url('logout')}}">
             

@@ -71,8 +71,7 @@
 @endsection
 
 @section('footer_scripts')
-    <?php $version = "1.2.3"; ?>
-        
+    <?php $version = "1.2.4"; ?>  
     <script type="text/javascript" src="{{url('assets/scripts/core/bank_ctrl.js?v='.$version)}}" ></script>
 
     

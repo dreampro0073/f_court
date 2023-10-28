@@ -40,9 +40,13 @@ app.controller('certiCopyCtrl', function($scope , $http, $timeout , DBService) {
     }
     
     $scope.storeCertified = function () {
+        $scope.loading= true;
+
         
         DBService.postCall($scope.formData, '/api/data-entry/certified-copy/store').then((data) => {
             alert(data.message);
+            $scope.loading= false;
+
             
             if(data.success){
                 window.location = data.redirect_url;

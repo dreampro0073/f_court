@@ -52,12 +52,17 @@ app.controller('type1Ctrl', function($scope , $http, $timeout , DBService,Upload
     
     $scope.storeType1 = function () {
 
+        $scope.loading= true;
+
         DBService.postCall($scope.formData, '/api/data-entry/type1/store').then((data) => {
-             alert(data.message);
+            alert(data.message);
+            $scope.loading= false;
+
 
             if(data.success){
                 window.location = data.redirect_url;
             }
+
             
         });
     }

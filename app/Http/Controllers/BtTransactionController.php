@@ -98,11 +98,8 @@ class BtTransactionController extends Controller {
 		$validator = Validator::make($cre,$rules);
 
 		if($validator->passes()){
-			$day_id = $request->tat;
-			if (isset($request->new_day)) {
-				$day_id = User::addDays($request->new_day);
-			}
-
+			$day_id = $request->has('tat')?$request->tat:0;
+			
 			$data = [
 				'bank_comp_id' => $request->bank_comp_id,
 				'department' => $request->department,
@@ -138,6 +135,14 @@ class BtTransactionController extends Controller {
 
 		}else{
 			$data['success'] = false;
+            $error = '';
+            $messages = $validator->messages();
+            foreach($messages->all() as $message){
+                $error = $message;
+                break;
+            }
+            $data['success'] = false;
+            $data['message'] = $error;
 
           
 

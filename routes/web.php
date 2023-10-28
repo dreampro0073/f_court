@@ -54,6 +54,7 @@ Route::group(['prefix'=>"admin"], function(){
 
 
 	Route::get('/dashboard',[AdminController::class,'dashboard']);
+	Route::get('/test',[AdminController::class,'test']);
 
 	Route::group(['prefix'=>"data-entry"], function(){
 		Route::group(['prefix'=>"type1"], function(){

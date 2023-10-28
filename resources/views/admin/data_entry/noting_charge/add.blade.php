@@ -8,11 +8,7 @@
 <div class="main" ng-controller="notingCtrl" ng-init="noting_id={{$noting_id}}; add()">
     <div class="row mb-4">
         <div class="col-md-6">
-<<<<<<< HEAD
-            <h1 class="h3 mb-2 text-gray-800">Add</h1>
-=======
             <h1 class="h3 mb-2 text-gray-800">Noting of Bank Charge</h1>
->>>>>>> bd1b67463ae943840f4f2eafeab04da27a70c8cf
         </div>
         <div class="col-md-6 text-right">
             <a href="{{url('admin/data-entry/noting-charge')}}" class="btn btn-info">Back</a>
@@ -37,7 +33,7 @@
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Department</label>
-                        <input type="text" ng-model="formData.department" class="form-control" required />
+                        <input type="text" ng-model="formData.department" class="form-control" />
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Through</label>
@@ -111,13 +107,10 @@
                         <select ng-model="formData.tat" class="form-control" required convert-to-number >
                             <option value="">--select--</option>
                             <option ng-repeat="item in days" value=@{{item.id}}>@{{ item.day}}</option>
-                            <option value=-1>New</option>
+                            
                         </select> 
                     </div>
-                    <div class="col-md-4 form-group" ng-if="formData.tat == -1"> 
-                        <label>Tat Number of days</label>
-                        <input type="text" placeholder="like: 10 Days" ng-model="formData.new_day" class="form-control" required />
-                    </div>
+                    
                     <div class="col-md-4 form-group"> 
                         <label>Status</label>
                         <select ng-model="formData.status" class="form-control" required  convert-to-number>
@@ -128,7 +121,12 @@
                     </div>
                     
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button> 
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary" ng-disabled="loading">
+                        <span ng-if="!loading">Submit</span>
+                        <span ng-if="loading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    </button> 
+                </div>
            </form>
         </div>
     </div> 
@@ -136,7 +134,7 @@
 @endsection
 
 @section('footer_scripts')
-    <?php $version = "1.2.3"; ?>
+    <?php $version = "1.2.4"; ?>
         
     <script type="text/javascript" src="{{url('assets/scripts/core/noting_charge_ctrl.js?v='.$version)}}" ></script>
 

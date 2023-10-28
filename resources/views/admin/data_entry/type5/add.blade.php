@@ -23,7 +23,7 @@
                 <div class="row">
                     
                     <div class="col-md-4 form-group"> 
-                        <label>Thesil</label>
+                        <label>Tehsil</label>
                         <select ng-model="formData.tehsil_id" class="form-control" required  convert-to-number>
                             <option value="">--select--</option>
                             <option ng-repeat="item in tehsils" value=@{{item.id}}>@{{ item.tehsil_name}}</option>
@@ -55,7 +55,7 @@
                     </div>
                     
                     <div class="col-md-4 form-group">
-                        <label>Seller /First Party Name </label>
+                        <label>Seller/First Party Name </label>
                         <input type="text" ng-model="formData.seller_name" class="form-control" required />
 
                     </div>
@@ -92,14 +92,10 @@
                         <select ng-model="formData.tat" class="form-control" required convert-to-number >
                             <option value="">--select--</option>
                             <option ng-repeat="item in days" value=@{{item.id}}>@{{ item.day}}</option>
-                            <option value=-1>New</option>
+                            
                         </select> 
                     </div>
-                    <div class="col-md-4 form-group" ng-if="formData.tat == -1"> 
-                        <label>Tat Number of days</label>
-                        <input type="text" placeholder="like: 10 Days" ng-model="formData.new_day" class="form-control" required />
-                    </div>
-
+                    
                     <div class="col-md-4 form-group"> 
                         <label>Status</label>
                         <select ng-model="formData.status" class="form-control" required  convert-to-number>
@@ -128,7 +124,12 @@
                 <div class="pt-2 mb-4">
                     <button ng-click="addEMI();" type="button" class="btn btn-info">Add Amount</button> 
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button> 
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary" ng-disabled="loading">
+                        <span ng-if="!loading">Submit</span>
+                        <span ng-if="loading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    </button> 
+                </div>
            </form>
         </div>
     </div>
@@ -138,7 +139,7 @@
 @endsection
 
 @section('footer_scripts')
-    <?php $version = "1.2.3"; ?>
+    <?php $version = "1.2.4"; ?>
         
     <script type="text/javascript" src="{{url('assets/scripts/core/type5_ctrl.js?v='.$version)}}" ></script>
 

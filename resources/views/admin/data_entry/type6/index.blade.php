@@ -41,7 +41,7 @@
                         @foreach($data as $key => $item)
                         <tr class="<?php echo App\Models\User::bgClass($item->status); ?>">
                             <td>{{$key+1}}</td>
-                            <td>{{$item->client_name}}</td>
+                            <td>{{$item->court_name}}</td>
                             <td>{{$item->case_name_1}} / {{$item->case_name_2}}</td>
                             <td>{{$item->case_no_1}} / {{$item->case_no_2}}</td>
                             <td>{{$item->bill_type}} / {{$item->case_no_2}}</td>
@@ -63,7 +63,7 @@
 @endsection
 
 @section('footer_scripts')
-    <?php $version = "1.2.3"; ?>
+    <?php $version = "1.2.4"; ?>
     <script type="text/javascript" src="{{url('assets/scripts/core/type6_ctrl.js?v='.$version)}}" ></script>
    
     

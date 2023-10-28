@@ -43,8 +43,11 @@ app.controller('saleCtrl', function($scope , $http, $timeout , DBService) {
     }
     
     $scope.storeSaleDeed = function () {
+        $scope.loading= true;
+
         DBService.postCall($scope.formData, '/api/data-entry/sale-deed/store').then((data) => {
             alert(data.message);
+            $scope.loading= false;
             
             if(data.success){
                 window.location = data.redirect_url;

@@ -43,21 +43,20 @@
                         <label><input type="radio" ng-model="formData.valution_report"  ng-value="2">&nbsp;No</label>
                     </div>
 
-                    
                     <div class="col-md-4 form-group">
                         <label>Finance Type</label>
-                        <select ng-model="formData.type" class="form-control" required >
+                        <select ng-model="formData.type" class="form-control" required convert-to-number>
                             <option value="">--select--</option>
-                            <option value='KCC'>KCC </option>
-                            <option value='Green Card'>Green Card </option>
-                            <option value='Tractor'>Tractor</option>
-                            <option value='-1'>New</option>
+                            <option ng-repeat="item in finance_types" value=@{{item.id}}>@{{ item.finance_type}}</option>
+                            <option value="-1">New</option>
                         </select>
                     </div>
-                    <div class="col-md-4 form-group" ng-if="formData.type == -1"> 
+
+                     <div class="col-md-4 form-group" ng-if="formData.type == -1"> 
                         <label>Finance Name</label>
                         <input type="text" ng-model="formData.finance_name" class="form-control" />
                     </div>
+                    
                     <div class="col-md-4 form-group">
                         <label>Through</label>
                         <select ng-model="formData.through_id" class="form-control" required convert-to-number>
@@ -77,34 +76,25 @@
                         <label>Borrower Name</label>
                         <input type="text" ng-model="formData.borrower_name" class="form-control" required />
                     </div>
-
-
                     
                     <div class="col-md-4 form-group">
                         <label>Billing Type</label>
                         <select ng-model="formData.billing_type_id" class="form-control" required >
                             <option value="">--select--</option>
                             <option ng-repeat="item in billing_types" ng-value=@{{item.id}}>@{{ item.bill_type}}</option>
-                            <option value="-1">New</option>
+                            
                         </select>
                     </div>
-                    <div class="col-md-4 form-group" ng-if="formData.billing_type_id == -1"> 
-                        <label>Billing Name</label>
-                        <input type="text" ng-model="formData.billing_name" class="form-control" />
-                    </div>
+                    
                     <div class="col-md-4 form-group"> 
                         <label>TAT</label>
                         <select ng-model="formData.tat" class="form-control" required convert-to-number>
                             <option value="">--select--</option>
                             <option ng-repeat="item in days" value=@{{item.id}}>@{{ item.day}}</option>
-                            <option value=-1>New</option>
+                           
                         </select> 
                     </div>
-                    <div class="col-md-4 form-group" ng-if="formData.tat == -1"> 
-                        <label>Number of days</label>
-                        <input type="text" ng-model="formData.new_day" class="form-control"required />
-                    </div>
-
+                    
                     <div class="col-md-4 form-group"> 
                         <label>Status</label>
                         <select ng-model="formData.status" class="form-control" required  convert-to-number>
@@ -143,7 +133,12 @@
                         <button ng-click="addEMI();" type="button" class="btn btn-info btn-sm">Add Amount</button> 
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button> 
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary" ng-disabled="loading">
+                        <span ng-if="!loading">Submit</span>
+                        <span ng-if="loading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    </button> 
+                </div>
            </form>
         </div>
     </div>    
@@ -152,7 +147,7 @@
 
 @section('footer_scripts')
     
-    <?php $version = "1.2.3"; ?>
+    <?php $version = "1.2.4"; ?>
         
     <script type="text/javascript" src="{{url('assets/scripts/core/type3_ctrl.js?v='.$version)}}" ></script>
 

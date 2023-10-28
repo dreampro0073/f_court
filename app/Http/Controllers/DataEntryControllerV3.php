@@ -59,6 +59,8 @@ class DataEntryControllerV3 extends Controller {
 			}else{
 				$agri_fin->emi_ar[] = ['e_amount'=>''];
 			}
+
+			$agri_fin->type = ($agri_fin->type)?intval($agri_fin->type):0;
 		}
 
 		$banks = User::getBanks();
@@ -68,12 +70,16 @@ class DataEntryControllerV3 extends Controller {
 		$days = User::getDays();
 		$status_ar = User::statusList();
 
+		$finance_types = User::financeTypes();
+
+
 		$data['agri_fin'] = $agri_fin;
 		$data['banks'] = $banks;
 		$data['years'] = $years;
 		$data['through'] = $through;
 		$data['billing_types'] = $billing_types;
 		$data['days'] = $days;
+		$data['finance_types'] = $finance_types;
 		$data['status_ar'] = $status_ar;
 		$data['success'] = true;
 
@@ -88,9 +94,9 @@ class DataEntryControllerV3 extends Controller {
 			'borrower_name' => $request->borrower_name,
 			// 'amount' => $request->amount,
 			
-			'billing_type_id' => $request->billing_type_id,
-			'year_search_id' => $request->year_search_id,
-			'type' => $request->type,
+			// 'billing_type_id' => $request->billing_type_id,
+			// 'year_search_id' => $request->year_search_id,
+			// 'type1' => $request->type,
 		];
 
 		$rules = [
@@ -99,33 +105,29 @@ class DataEntryControllerV3 extends Controller {
 			'borrower_name' => 'required',
 			// 'amount' => 'required',
 			
-			'year_search_id' => 'required',
-			'billing_type_id' => 'required',
-			'type' => 'required',
+			// 'year_search_id' => 'required',
+			// 'billing_type_id' => 'required',
+			// 'type' => 'required',
 		];
 
 		$validator = Validator::make($cre,$rules);
 
 		if($validator->passes()){
 
-			$day_id = $request->tat;
-			if (isset($request->new_day)) {
-				$day_id = User::addDays($request->new_day);
-			}
+			$day_id = $request->has('tat')?$request->tat:0;
 
 			$through_id = $request->through_id;
 
 			if(isset($request->through_name)){
 				$through_id = User::addThrough($request->through_name);
 			}
-			$billing_type_id = $request->billing_type_id;
 
-			if(isset($request->billing_name)){
-				$billing_type_id = User::addBilling($request->billing_name);
-			}
-			$finance_name = null;
+			$billing_type_id = $request->has('billing_type_id')?$request->billing_type_id:0;
+
+			$type = $request->has('type')?$request->type:0;
 			if(isset($request->finance_name)){
-				$finance_name = $request->finance_name;
+				$type = User::addFin($request->finance_name);
+
 			}
 			$emi_str = null;
 			$emi_str_ar = [];
@@ -146,7 +148,7 @@ class DataEntryControllerV3 extends Controller {
 				'bank_comp_id'=>$request->bank_comp_id,
 				'borrower_name'=>$request->borrower_name,
 				'amount'=>$request->has('amount')?$request->amount:null,
-				'type'=>$request->type,
+				'type'=>$type,
 				'status'=>$request->status,
 				'tat'=>$day_id,
 				'through_id'=>$through_id,
@@ -154,7 +156,7 @@ class DataEntryControllerV3 extends Controller {
 				'department_id'=>$request->department_id,
 				'contact_no'=>$request->has('contact_no')?$request->contact_no:null,
 				'email'=>$request->has('email')?$request->email:null,
-				'finance_name'=>$request->finance_name,
+				// 'finance_name'=>$request->finance_name,
 				'valution_report'=>$request->valution_report,
 				'emi_amount'=>$emi_str,
 
@@ -175,6 +177,14 @@ class DataEntryControllerV3 extends Controller {
 			$data['redirect_url'] = url('admin/data-entry/type3');
 		} else {
 			$data['success'] = false;
+            $error = '';
+            $messages = $validator->messages();
+            foreach($messages->all() as $message){
+                $error = $message;
+                break;
+            }
+            $data['success'] = false;
+            $data['message'] = $error;
 		}
 
 

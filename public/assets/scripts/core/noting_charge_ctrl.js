@@ -44,8 +44,10 @@ app.controller('notingCtrl', function($scope , $http, $timeout , DBService) {
     }
     
     $scope.storeType1 = function () {
-        DBService.postCall($scope.formData, '/api/data-entry/noting-charge/store').then((data) => {
-            alert(data.message);
+        $scope.loading= true;
+
+        DBService.postCall($scope.formData, '/api/data-entry/noting-charge/store').then((data) => {   
+            $scope.loading= false;
             
             if(data.success){
                 window.location = data.redirect_url;

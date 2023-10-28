@@ -18,6 +18,7 @@ class DataEntryControllerV6 extends Controller {
 
 		$data = DB::table('court_cases')->select('court_cases.*','banks.bank_name','billing_types.bill_type')->leftJoin('billing_types','billing_types.id','=','court_cases.billing_type_id')->leftJoin('banks','banks.id','=','court_cases.bank_comp_id')->get();
 
+		// dd($data);
 		$st = User::showStatusList();
 		
 		foreach ($data as $key => $item) {
@@ -82,7 +83,7 @@ class DataEntryControllerV6 extends Controller {
 			'case_name_2' => $request->case_name_2,
 			'case_no_1' => $request->case_no_1,
 			'case_no_2' => $request->case_no_2,
-			'billing_type_id' => $request->billing_type_id,
+			// 'billing_type_id' => $request->billing_type_id,
 		];
 
 		$rules = [
@@ -91,24 +92,15 @@ class DataEntryControllerV6 extends Controller {
 			'case_name_2' => 'required',
 			'case_no_1' => 'required',
 			'case_no_2' => 'required',
-			'billing_type_id' => 'required',
+			// 'billing_type_id1' => 'required',
 		];
 
 		$validator = Validator::make($cre,$rules);
 
 		if($validator->passes()){
-
-			$day_id = $request->tat;
-			if (isset($request->new_day)) {
-				$day_id = User::addDays($request->new_day);
-			}
-
-			$billing_type_id = $request->billing_type_id;
-
-			if(isset($request->billing_name)){
-				$billing_type_id = User::addBilling($request->billing_name);
-			}
-
+			$day_id = $request->has('tat')?$request->tat:0;
+			
+			$billing_type_id = $request->has('billing_type_id')?$request->billing_type_id:0;
 			$emi_str = null;
 			$emi_str_ar = [];
 			if($request->has('emi_ar')){
@@ -164,6 +156,14 @@ class DataEntryControllerV6 extends Controller {
 
 		}else{
 			$data['success'] = false;
+            $error = '';
+            $messages = $validator->messages();
+            foreach($messages->all() as $message){
+                $error = $message;
+                break;
+            }
+            $data['success'] = false;
+            $data['message'] = $error;
 
           
 

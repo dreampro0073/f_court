@@ -2,9 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Test</title>
-
-	<title>SB Admin 2 - Login</title>
+	<title>Thakral & Thakral </title>
 
     
     <link href="{{url('assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -134,7 +132,7 @@
     <script type="text/javascript" src="{{url('assets/scripts/angular-selectize.js')}}" ></script>
 
     <!-- End Angular Scripts -->
-    <?php $version = "1.2.3"; ?>
+    <?php $version = "1.2.4"; ?>
     <script type="text/javascript" src="{{url('assets/js/custom.js?v='.$version)}}"></script>
     <script type="text/javascript" src="{{url('assets/scripts/core/app.js?v='.$version)}}" ></script>
     @yield('footer_scripts')

@@ -248,4 +248,9 @@ ALTER TABLE `court_cases` ADD `next_date` DATE NULL DEFAULT NULL AFTER `date`;
 ALTER TABLE `court_cases` ADD `stage` VARCHAR(255) NULL DEFAULT NULL AFTER `status`;
 ALTER TABLE `noting_charge` ADD `bank_branch` VARCHAR(255) NULL DEFAULT NULL AFTER `bank_comp_id`;
 
+// DIpanshu 27th Oct 2023
+
+
+CREATE TABLE `f_court`.`finance_types` ( `id` INT NOT NULL AUTO_INCREMENT , `finance_type` VARCHAR(255) NULL DEFAULT NULL , `status` TINYINT(1) NOT NULL DEFAULT '0' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
 
