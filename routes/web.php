@@ -47,125 +47,127 @@ Route::get('/logout',function(){
 });
 
 
+Route::group(['middleware'=>'auth'],function(){
 
-Route::group(['prefix'=>"admin"], function(){
+	Route::group(['prefix'=>"admin"], function(){
 
-	Route::post('/upload-file',[AdminController::class,'uploadFile']);
+		Route::post('/upload-file',[AdminController::class,'uploadFile']);
 
 
-	Route::get('/dashboard',[AdminController::class,'dashboard']);
+		Route::get('/dashboard',[AdminController::class,'dashboard']);
 
-	Route::group(['prefix'=>"data-entry"], function(){
-		Route::group(['prefix'=>"type1"], function(){
-			Route::get('/',[DataEntryControllerV1::class, 'index']);
-			Route::get('/add/{opinion_id?}',[DataEntryControllerV1::class, 'add']);
-			Route::get('/delete/{opinion_id}',[DataEntryControllerV1::class, 'delete']);		
-		});
+		Route::group(['prefix'=>"data-entry"], function(){
+			Route::group(['prefix'=>"type1"], function(){
+				Route::get('/',[DataEntryControllerV1::class, 'index']);
+				Route::get('/add/{opinion_id?}',[DataEntryControllerV1::class, 'add']);
+				Route::get('/delete/{opinion_id}',[DataEntryControllerV1::class, 'delete']);		
+			});
 
-		Route::group(['prefix'=>"type2"], function(){
-			Route::get('/',[DataEntryControllerV2::class, 'index']);
-			Route::get('/add/{notice_id?}',[DataEntryControllerV2::class, 'add']);
-			Route::get('/delete/{notice_id}',[DataEntryControllerV2::class, 'delete']);;
+			Route::group(['prefix'=>"type2"], function(){
+				Route::get('/',[DataEntryControllerV2::class, 'index']);
+				Route::get('/add/{notice_id?}',[DataEntryControllerV2::class, 'add']);
+				Route::get('/delete/{notice_id}',[DataEntryControllerV2::class, 'delete']);;
 
-		});
+			});
 
-		Route::group(['prefix'=>"type3"], function(){
-			Route::get('/',[DataEntryControllerV3::class, 'index']);
-			Route::get('/add/{notice_id?}',[DataEntryControllerV3::class, 'add']);
-			Route::get('/delete/{notice_id}',[DataEntryControllerV3::class, 'delete']);;
+			Route::group(['prefix'=>"type3"], function(){
+				Route::get('/',[DataEntryControllerV3::class, 'index']);
+				Route::get('/add/{notice_id?}',[DataEntryControllerV3::class, 'add']);
+				Route::get('/delete/{notice_id}',[DataEntryControllerV3::class, 'delete']);;
 
-		});
+			});
 
-		Route::group(['prefix'=>"type4"], function(){
-			Route::get('/',[DataEntryControllerV4::class, 'index']);
-			Route::get('/add/{notice_id?}',[DataEntryControllerV4::class, 'add']);
-			Route::get('/delete/{notice_id}',[DataEntryControllerV4::class, 'delete']);;
+			Route::group(['prefix'=>"type4"], function(){
+				Route::get('/',[DataEntryControllerV4::class, 'index']);
+				Route::get('/add/{notice_id?}',[DataEntryControllerV4::class, 'add']);
+				Route::get('/delete/{notice_id}',[DataEntryControllerV4::class, 'delete']);;
 
-		});
+			});
 
-		Route::group(['prefix'=>"type5"], function(){
-			Route::get('/',[DataEntryControllerV5::class, 'index']);
-			Route::get('/add/{notice_id?}',[DataEntryControllerV5::class, 'add']);
-			Route::get('/delete/{notice_id}',[DataEntryControllerV5::class, 'delete']);;
+			Route::group(['prefix'=>"type5"], function(){
+				Route::get('/',[DataEntryControllerV5::class, 'index']);
+				Route::get('/add/{notice_id?}',[DataEntryControllerV5::class, 'add']);
+				Route::get('/delete/{notice_id}',[DataEntryControllerV5::class, 'delete']);;
 
-		});
+			});
 
-		Route::group(['prefix'=>"type6"], function(){
-			Route::get('/',[DataEntryControllerV6::class, 'index']);
-			Route::get('/add/{court_case_id?}',[DataEntryControllerV6::class, 'add']);
+			Route::group(['prefix'=>"type6"], function(){
+				Route::get('/',[DataEntryControllerV6::class, 'index']);
+				Route::get('/add/{court_case_id?}',[DataEntryControllerV6::class, 'add']);
 
-		});
+			});
 
-		Route::group(['prefix'=>"noting-charge"], function(){
-			Route::get('/',[NotingChargeController::class, 'index']);
-			Route::get('/add/{noting_id?}',[NotingChargeController::class, 'add']);
+			Route::group(['prefix'=>"noting-charge"], function(){
+				Route::get('/',[NotingChargeController::class, 'index']);
+				Route::get('/add/{noting_id?}',[NotingChargeController::class, 'add']);
 
-		});
-		
-		Route::group(['prefix'=>"certified-copy"], function(){
-			Route::get('/',[CertifiedCopyController::class, 'index']);
-			Route::get('/add/{certifide_id?}',[CertifiedCopyController::class, 'add']);
+			});
+			
+			Route::group(['prefix'=>"certified-copy"], function(){
+				Route::get('/',[CertifiedCopyController::class, 'index']);
+				Route::get('/add/{certifide_id?}',[CertifiedCopyController::class, 'add']);
 
-		});
-		
-		Route::group(['prefix'=>"workstation-mutation"], function(){
-			Route::get('/',[WorkstationMutationController::class, 'index']);
-			Route::get('/add/{work_id?}',[WorkstationMutationController::class, 'add']);
+			});
+			
+			Route::group(['prefix'=>"workstation-mutation"], function(){
+				Route::get('/',[WorkstationMutationController::class, 'index']);
+				Route::get('/add/{work_id?}',[WorkstationMutationController::class, 'add']);
 
-		});
-		
-		Route::group(['prefix'=>"sale-deed"], function(){
-			Route::get('/',[SaleDeedController::class, 'index']);
-			Route::get('/add/{noting_id?}',[SaleDeedController::class, 'add']);
+			});
+			
+			Route::group(['prefix'=>"sale-deed"], function(){
+				Route::get('/',[SaleDeedController::class, 'index']);
+				Route::get('/add/{noting_id?}',[SaleDeedController::class, 'add']);
 
-		});
-		
-		Route::group(['prefix'=>"bt-transaction"], function(){
-			Route::get('/',[BtTransactionController::class, 'index']);
-			Route::get('/add/{noting_id?}',[BtTransactionController::class, 'add']);
+			});
+			
+			Route::group(['prefix'=>"bt-transaction"], function(){
+				Route::get('/',[BtTransactionController::class, 'index']);
+				Route::get('/add/{noting_id?}',[BtTransactionController::class, 'add']);
 
-		});
-	});
-	
-	Route::group(['prefix'=>"banks"], function(){
-		Route::get('/',[AdminController::class, 'banksList']);
-
-	});
-		
-		
-
-	
-
-	Route::group(['prefix'=>"users"], function(){
-		Route::get('/',[UserController::class, 'usersList']);
-		Route::get('/add/{user_id?}',[UserController::class, 'addUser']);
-
-	});	
-
-	Route::group(['prefix'=>"attendance"], function(){
-		Route::get('/',[AttendanceController::class, 'index']);
-		Route::get('/mark',[AttendanceController::class, 'markAttendance']);
-		Route::get('/show/{user_id}/{month_id}',[AttendanceController::class, 'showAttendance']);
-	});
-
-	Route::group(['prefix'=>"bill-books"], function(){
-		Route::group(['prefix'=>"type1"], function(){
-			Route::get('/',[BillBookController::class, 'indexType1']);
-			Route::get('/add/{temp_bill_id?}',[BillBookController::class, 'addType1']);
-			Route::get('/delete/{temp_bill_id}',[BillBookController::class, 'deleteType1']);		
-
+			});
 		});
 		
-		Route::group(['prefix'=>"type2"], function(){
-			Route::get('/',[BillBookController::class, 'indexType2']);
-			Route::get('/add/{book_bill_id?}',[BillBookController::class, 'addType2']);
-			Route::get('/delete/{book_bill_id}',[BillBookController::class, 'deleteType2']);		
+		Route::group(['prefix'=>"banks"], function(){
+			Route::get('/',[AdminController::class, 'banksList']);
 
 		});
-	});
+			
+			
 
-	Route::group(['prefix'=>"day-book"], function(){
-		Route::get('/',[DayBookController::class, 'index']);
+		
+
+		Route::group(['prefix'=>"users"], function(){
+			Route::get('/',[UserController::class, 'usersList']);
+			Route::get('/add/{user_id?}',[UserController::class, 'addUser']);
+
+		});	
+
+		Route::group(['prefix'=>"attendance"], function(){
+			Route::get('/',[AttendanceController::class, 'index']);
+			Route::get('/mark',[AttendanceController::class, 'markAttendance']);
+			Route::get('/show/{user_id}/{month_id}',[AttendanceController::class, 'showAttendance']);
+		});
+
+		Route::group(['prefix'=>"bill-books"], function(){
+			Route::group(['prefix'=>"type1"], function(){
+				Route::get('/',[BillBookController::class, 'indexType1']);
+				Route::get('/add/{temp_bill_id?}',[BillBookController::class, 'addType1']);
+				Route::get('/delete/{temp_bill_id}',[BillBookController::class, 'deleteType1']);		
+
+			});
+			
+			Route::group(['prefix'=>"type2"], function(){
+				Route::get('/',[BillBookController::class, 'indexType2']);
+				Route::get('/add/{book_bill_id?}',[BillBookController::class, 'addType2']);
+				Route::get('/delete/{book_bill_id}',[BillBookController::class, 'deleteType2']);		
+
+			});
+		});
+
+		Route::group(['prefix'=>"day-book"], function(){
+			Route::get('/',[DayBookController::class, 'index']);
+		});
 	});
 });
 
