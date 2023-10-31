@@ -12,8 +12,9 @@ app.controller('bankCtrl', function($scope , $http, $timeout , DBService,Upload)
         DBService.postCall({bank_name : $scope.bank_name}, '/api/banks/store').then((data) => {
             alert(data.message);
             $scope.bank_name = "";
-             $scope.purpose_loading = false;
-             $("#bankModal").modal("hide"); 
+            $scope.purpose_loading = false;
+            $("#bankModal").modal("hide"); 
+            location.reload();
         });
     }
 

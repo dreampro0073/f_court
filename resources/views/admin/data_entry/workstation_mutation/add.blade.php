@@ -68,7 +68,12 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button> 
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary" ng-disabled="loading">
+                        <span ng-if="!loading">Submit</span>
+                        <span ng-if="loading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    </button> 
+                </div>
            </form>
         </div>
     </div> 
@@ -76,7 +81,7 @@
 @endsection
 
 @section('footer_scripts')
-    <?php $version = "1.2.3"; ?>
+    <?php $version = "1.2.4"; ?>
         
     <script type="text/javascript" src="{{url('assets/scripts/core/work_mutation_ctrl.js?v='.$version)}}" ></script>
 

@@ -99,20 +99,13 @@ class DataEntryControllerV4 extends Controller {
 
 		if($validator->passes()){
 
-			$day_id = $request->tat;
-			if (isset($request->new_day)) {
-				$day_id = User::addDays($request->new_day);
-			}
+			$day_id = $request->has('tat')?$request->tat:0;
+			$billing_type_id = $request->has('billing_type_id')?$request->billing_type_id:0;
 
 			$through_id = $request->through_id;
 
 			if(isset($request->through_name)){
 				$through_id = User::addThrough($request->through_name);
-			}
-			$billing_type_id = $request->billing_type_id;
-
-			if(isset($request->billing_name)){
-				$billing_type_id = User::addBilling($request->billing_name);
 			}
 
 			$drafting_type_id = $request->drafting_type_id;
@@ -131,7 +124,6 @@ class DataEntryControllerV4 extends Controller {
 						}
 					}
 					$emi_str = implode(',', $emi_str_ar);
-
 				}
 			}
 
@@ -164,7 +156,14 @@ class DataEntryControllerV4 extends Controller {
 			$data['redirect_url'] = url('admin/data-entry/type4');
 		} else {
 			$data['success'] = false;
-			$data['message'] = "Please fill required field";
+            $error = '';
+            $messages = $validator->messages();
+            foreach($messages->all() as $message){
+                $error = $message;
+                break;
+            }
+            $data['success'] = false;
+            $data['message'] = $error;
 		}
 
 

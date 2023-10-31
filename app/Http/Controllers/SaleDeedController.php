@@ -110,10 +110,7 @@ class SaleDeedController extends Controller {
 		$validator = Validator::make($cre,$rules);
 
 		if($validator->passes()){
-			$day_id = $request->tat;
-			if (isset($request->new_day)) {
-				$day_id = User::addDays($request->new_day);
-			}
+			
 
 			$through_id = $request->through_id;
 
@@ -172,6 +169,14 @@ class SaleDeedController extends Controller {
 
 		}else{
 			$data['success'] = false;
+            $error = '';
+            $messages = $validator->messages();
+            foreach($messages->all() as $message){
+                $error = $message;
+                break;
+            }
+            $data['success'] = false;
+            $data['message'] = $error;
 
           
 

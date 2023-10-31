@@ -157,7 +157,7 @@ class UserController extends Controller {
             }else{
                 $data['password'] = Hash::make($request->password);
                 $data['password_check'] = $request->password;
-                $data['privilege'] = 1;
+                $data['privilege'] = 2;
                 DB::table('users')->insert($data);
 
                 $data['message'] = 'Successfully Added';

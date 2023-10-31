@@ -52,15 +52,20 @@
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Billing Type</label>
-                        <select ng-model="formData.billing_type_id" class="form-control" required >
+                        <select ng-model="formData.billing_type_id" class="form-control" required convert-to-number>
                             <option value="">--select--</option>
-                            <option ng-repeat="item in billing_types" ng-value=@{{item.id}}>@{{ item.bill_type}}</option>
-                            <option value="-1">New</option>
+                            <option ng-repeat="item in billing_types" value=@{{item.id}}>@{{ item.bill_type}}</option>
+                            
                         </select>
                     </div>
-                    <div class="col-md-4 form-group" ng-if="formData.billing_type_id == -1"> 
-                        <label>Billing Name</label>
-                        <input type="text" ng-model="formData.billing_name" class="form-control" />
+                    
+                    <div class="col-md-4 form-group"> 
+                        <label>TAT</label>
+                        <select ng-model="formData.tat" class="form-control" required convert-to-number >
+                            <option value="">--select--</option>
+                            <option ng-repeat="item in days" value=@{{item.id}}>@{{ item.day}}</option>
+                            
+                        </select> 
                     </div>
 
                     <div class="col-md-4 form-group"> 
@@ -110,7 +115,12 @@
                         <button ng-click="addEMI();" type="button" class="btn btn-info">Add Amount</button> 
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button> 
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary" ng-disabled="loading">
+                        <span ng-if="!loading">Submit</span>
+                        <span ng-if="loading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    </button> 
+                </div>
            </form>
         </div>
     </div>
@@ -120,7 +130,7 @@
 @endsection
 
 @section('footer_scripts')
-   <?php $version = "1.2.3"; ?>
+   <?php $version = "1.2.4"; ?>
         
     <script type="text/javascript" src="{{url('assets/scripts/core/type6_ctrl.js?v='.$version)}}" ></script>
 @endsection

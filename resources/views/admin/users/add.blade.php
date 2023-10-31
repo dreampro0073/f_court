@@ -7,7 +7,7 @@
 @endsection
 
 @section('main')
-<div class="main" ng-controller="type6Ctrl" ng-init=" user_id = {{$user_id}}; init();">
+<div class="main" ng-controller="userCtrl" ng-init=" user_id = {{$user_id}}; init();">
     <div class="row mb-4">
         <div class="col-md-6">
             <h1 class="h3 mb-2 text-gray-800">Add Court Case</h1>

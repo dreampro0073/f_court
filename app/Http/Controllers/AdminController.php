@@ -45,6 +45,12 @@ class AdminController extends Controller {
         ]);
 	}
 
+	public function test(){
+		for ($i=1; $i <=45 ; $i++) { 
+			DB::table('days')->insert(['day'=>$i.' Days','status'=>0]);
+		}
+	}
+
 	public function uploadFile(Request $request){   
         $destination = 'files/';
 

@@ -36,8 +36,12 @@ app.controller('btTransCtrl', function($scope , $http, $timeout , DBService) {
     }
     
     $scope.storeBtTrans = function () {
+        $scope.loading= true;
+
         DBService.postCall($scope.formData, '/api/data-entry/bt-transaction/store').then((data) => {
             alert(data.message);
+            $scope.loading= false;
+
             
             if(data.success){
                 window.location = data.redirect_url;

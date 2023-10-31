@@ -101,9 +101,17 @@ class User extends Authenticatable {
     
     public static function getDays(){
 
-        $days = DB::table('days')->where('status',0)->orderBy('day', 'ASC')->get();
+        $days = DB::table('days')->where('status',0)->get();
 
         return $days;
+
+    }
+
+    public static function financeTypes(){
+
+        $finance_types = DB::table('finance_types')->where('status',0)->get();
+
+        return $finance_types;
 
     }
     
@@ -124,11 +132,12 @@ class User extends Authenticatable {
     public static function getAgriFin(){
 
         $agriFinSql = DB::table('agricultural_finance')
-        ->select('agricultural_finance.*', 'year_search.ys_name', 'banks.bank_name', 'through.through_type', 'billing_types.bill_type')
+        ->select('agricultural_finance.*', 'year_search.ys_name', 'banks.bank_name', 'through.through_type', 'billing_types.bill_type','finance_types.finance_type')
         ->leftJoin('year_search', 'year_search.id', '=', 'agricultural_finance.year_search_id')
         ->leftJoin('banks','banks.id','=','agricultural_finance.bank_comp_id')
         ->leftJoin('through','through.id','=','agricultural_finance.through_id')
-        ->leftJoin('billing_types','billing_types.id','=','agricultural_finance.billing_type_id');
+        ->leftJoin('billing_types','billing_types.id','=','agricultural_finance.billing_type_id')
+        ->leftJoin('finance_types','finance_types.id','=','agricultural_finance.type');
 
         return $agriFinSql;
 
@@ -224,7 +233,7 @@ class User extends Authenticatable {
         $day_id = DB::table('days')->insertGetId([
             'day'=>$name,
             'created_at'=>date('Y-m-d H:i:s'),
-            'status' => 1,
+            // 'status' => 1,
         ]);
 
         return $day_id;
@@ -244,11 +253,21 @@ class User extends Authenticatable {
     
         $through_id = DB::table('through')->insertGetId([
             'through_type'=>$name,
-            'status' => 1,
+            // 'status' => 1,
             // 'created_at'=>date('Y-m-d H:i:s'),
         ]);
 
         return $through_id;
+    }
+
+    public static function addFin($name){
+    
+        $fin_id = DB::table('finance_types')->insertGetId([
+            'finance_type'=>$name,
+            
+        ]);
+
+        return $fin_id;
     }
 
     public static function addVillage($name){
@@ -275,7 +294,7 @@ class User extends Authenticatable {
     
         $billing_type_id = DB::table('billing_types')->insertGetId([
             'bill_type'=>$name,
-            'status' => 1,
+            // 'status' => 1,
         ]);
 
         return $billing_type_id;

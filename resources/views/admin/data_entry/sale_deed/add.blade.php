@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Department</label>
-                        <input type="text" ng-model="formData.department_id" class="form-control" required />
+                        <input type="text" ng-model="formData.department_id" class="form-control" />
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Through</label>
@@ -109,11 +109,7 @@
 
 
                    
-                    <div class="col-md-4 form-group" ng-if="formData.tat == -1"> 
-                        <label>Number of days</label>
-                        <input type="text" placeholder="10 days" ng-model="formData.new_day" class="form-control" required />
-                    </div>
-
+                   
                     <div class="col-md-4 form-group"> 
                         <label>Status</label>
                         <select ng-model="formData.status" class="form-control" required  convert-to-number>
@@ -127,7 +123,12 @@
                         <input type="text" ng-model="formData.submitted_date" class="form-control datepicker3" />
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button> 
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary" ng-disabled="loading">
+                        <span ng-if="!loading">Submit</span>
+                        <span ng-if="loading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    </button> 
+                </div> 
            </form>
         </div>
     </div> 
@@ -135,7 +136,7 @@
 @endsection
 
 @section('footer_scripts')
-    <?php $version = "1.2.3"; ?>
+    <?php $version = "1.2.4"; ?>
         
     <script type="text/javascript" src="{{url('assets/scripts/core/sale_deed_ctrl.js?v='.$version)}}" ></script>
 

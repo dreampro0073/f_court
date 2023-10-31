@@ -96,17 +96,8 @@ class DataEntryControllerV2 extends Controller {
 		$validator = Validator::make($cre,$rules);
 
 		if($validator->passes()){
-			$day_id = $request->tat;
-			if (isset($request->new_day)) {
-				$day_id = User::addDays($request->new_day);
-			}
-
+			$day_id = $request->has('tat')?$request->tat:0;
 			$billing_type_id = $request->has('billing_type_id')?$request->billing_type_id:0;
-
-
-			if(isset($request->billing_name)){
-				$billing_type_id = User::addBilling($request->billing_name);
-			}
 			$emi_str = null;
 			$emi_str_ar = [];
 			if($request->has('emi_ar')){
@@ -153,8 +144,15 @@ class DataEntryControllerV2 extends Controller {
 			$data['message'] = $message;
 			$data['success'] = true;
 		}else{
-			$data['message'] = $validator->errors();
 			$data['success'] = false;
+            $error = '';
+            $messages = $validator->messages();
+            foreach($messages->all() as $message){
+                $error = $message;
+                break;
+            }
+            $data['success'] = false;
+            $data['message'] = $error;
 		}
 
 		$data['redirect_url'] = url('admin/data-entry/type2');

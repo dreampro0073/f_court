@@ -43,7 +43,11 @@ app.controller('type6Ctrl', function($scope , $http, $timeout , DBService) {
     }
 
     $scope.onSubmit = () =>{
+        $scope.loading= true;
+
          DBService.postCall($scope.formData, '/api/data-entry/type6/store').then((data) => {
+            $scope.loading= false;
+            
             if(data.success) {
                 alert(data.message);
                 window.location = data.redirect_url; 

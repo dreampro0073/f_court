@@ -41,7 +41,7 @@
                         <tr class="<?php echo App\Models\User::bgClass($data->status); ?>">
                             <td>{{$key+1}}</td>
 
-                            <td>{{$data->type}}</td>
+                            <td>{{$data->finance_type}}</td>
                             <td>{{$data->bank_name}}</td>
                             <td>{{$data->through_type}}</td>
                             <td>{{$data->borrower_name}}</td>

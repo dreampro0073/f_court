@@ -28,9 +28,13 @@ app.controller('tempBills', function($scope , $http, $timeout , DBService) {
     }
     
     $scope.storeType1 = function () {
+        $scope.loading= true;
+
 
         DBService.postCall($scope.formData, '/api/bill-books/type1/store').then((data) => {
              alert(data.message);
+            $scope.loading= false;
+
 
             if(data.success){
                 window.location = data.redirect_url;
@@ -60,9 +64,12 @@ app.controller('BillBooks', function($scope , $http, $timeout , DBService) {
     }
 
     $scope.addType2 = function () {
+        $scope.loading= true;
+
 
         DBService.postCall({bill_book_id:$scope.bill_book_id}, '/api/bill-books/type2/init').then((data) => {
-            
+            $scope.loading= false;
+             
             if(data.success) {
                 $scope.formData = data.tempBill; 
                 $scope.banks = data.banks; 
@@ -71,10 +78,13 @@ app.controller('BillBooks', function($scope , $http, $timeout , DBService) {
     }
     
     $scope.storeType2 = function () {
-        alert("hhjhj");return;
+        $scope.loading= true;
+
 
         DBService.postCall($scope.formData, '/api/bill-books/type2/store').then((data) => {
-             alert(data.message);
+            alert(data.message);
+            $scope.loading= false;
+
 
             if(data.success){
                 window.location = data.redirect_url;

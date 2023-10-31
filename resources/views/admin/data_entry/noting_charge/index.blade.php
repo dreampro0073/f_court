@@ -26,20 +26,15 @@
                     <thead>
                         <tr>
                             <th>Sn</th>
-
-<<<<<<< HEAD
                             <th>Bank name</th>
                             <th>Through Type</th>
-                           
                             <th>TAT</th>
                             <th>Status</th>
-=======
-                            <th>Bank Name</th>
+
                             <th>Bank Branch</th>
                             <th>Brrower Name</th>
                             <th>SRO/ Tehsil</th>
                             <th>Tehsil/SRO</th>
->>>>>>> bd1b67463ae943840f4f2eafeab04da27a70c8cf
                             
                             <th>#</th>
                         </tr>
@@ -51,18 +46,15 @@
                             <td>{{$key+1}}</td>
                             
                             <td>{{ $item->bank_name}}</td>
-<<<<<<< HEAD
                             <td>{{ $item->through_type}}</td>
                             
                             <td>{{ $item->day}}</td>
                             <td>{{ $item->show_status}}</td>
-                            
-=======
                             <td>{{ $item->bank_branch}}</td>
                             <td>{{ $item->borrower_name}}</td>
-                            <td>{{ $item->st_type}}</td>
-                            <td>{{ $item->tehsil_id}}</td>
->>>>>>> bd1b67463ae943840f4f2eafeab04da27a70c8cf
+                            <td>{{ $item->st_type == 1 ? 'SRO' : 'Tehsil'}}</td>
+                            <td>{{ $item->tehsil_name}}</td>
+
                             
                             <td>
                                <a href="{{url('admin/data-entry/noting-charge/add/'.$item->id)}}" class="btn btn-primary btn-sm">Edit</a> 
@@ -80,7 +72,7 @@
 @endsection
 
 @section('footer_scripts')
-    <?php $version = "1.2.3"; ?>
+    <?php $version = "1.2.4"; ?>
         
     <script type="text/javascript" src="{{url('assets/scripts/core/noting_charge_ctrl.js?v='.$version)}}" ></script>
 

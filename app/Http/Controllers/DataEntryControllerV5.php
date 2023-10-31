@@ -109,14 +109,12 @@ class DataEntryControllerV5 extends Controller {
 
 		if($validator->passes()){
 
-			$day_id = $request->tat;
-			if (isset($request->new_day)) {
-				$day_id = User::addDays($request->new_day);
-			}
+			$day_id = $request->has('tat')?$request->tat:0;
+
 
 			$tehsil_id = $request->tehsil_id;
 
-			if (isset($request->new_day)) {
+			if (isset($request->tehsil_name)) {
 				$tehsil_id = User::addTehsil($request->tehsil_name);
 			}
 
@@ -171,6 +169,14 @@ class DataEntryControllerV5 extends Controller {
 			$data['redirect_url'] = url('admin/data-entry/type5');
 		} else {
 			$data['success'] = false;
+            $error = '';
+            $messages = $validator->messages();
+            foreach($messages->all() as $message){
+                $error = $message;
+                break;
+            }
+            $data['success'] = false;
+            $data['message'] = $error;
 
 		}
 

@@ -28,17 +28,6 @@ class DataEntryControllerV1 extends Controller {
 			$item->show_status = (isset($item->status))?$st[$item->status]:'';
 		}
 
-		// dd($legal_opinion_data);
-
-		
-		// if($request->has('exportExcel') && $request->has('exportExcel') == 1){
-  //           if(sizeof($legal_opinion_data) > 0){
-  //               include(app_path().'/Excel/legal_opinion.php');
-  //           }else{
-  //               return Redirect::back()->with('failure','No data found to export');
-  //           }
-  //       }
-
 		return view('admin.data_entry.type1.index', [
             "sidebar" => "entry",
             "subsidebar" => "entry",
@@ -98,11 +87,7 @@ class DataEntryControllerV1 extends Controller {
 			'year_search_id'=>$request->year_search_id,
 			'bank_comp_id'=>$request->bank_comp_id,
 			'through_id'=>$request->through_id,
-			'borrower_name'=>$request->borrower_name,
-			// 'amount'=>$request->amount,
-			// 'billing_type_id'=>$request->billing_type_id,
-			// 'contact_no'=>$request->contact_no,
-			// 'email'=>$request->email,
+			'borrower_name'=>$request->borrower_name
 		];
 
 		$rules = [
@@ -110,30 +95,19 @@ class DataEntryControllerV1 extends Controller {
 			'bank_comp_id'=>'required',
 			'through_id'=>'required',
 			'borrower_name'=>'required',
-			// 'amount'=>'required',
-			// 'billing_type_id'=>'required',
-			// 'contact_no'=>'required',
-			// 'email'=>'required',
 		];
 
 		$validator = Validator::make($cre,$rules);
 
 		if($validator->passes()){
-			$day_id = $request->tat;
-			if (isset($request->new_day)) {
-				$day_id = User::addDays($request->new_day);
-			}
-
+			
 			$through_id = $request->through_id;
 
 			if(isset($request->through_name)){
 				$through_id = User::addThrough($request->through_name);
 			}
 			$billing_type_id = $request->has('billing_type_id')?$request->billing_type_id:0;
-
-			if(isset($request->billing_name)){
-				$billing_type_id = User::addBilling($request->billing_name);
-			}
+			$day_id = $request->has('tat')?$request->tat:0;
 			$emi_str = null;
 			$emi_str_ar = [];
 			if($request->has('emi_ar')){
@@ -177,8 +151,15 @@ class DataEntryControllerV1 extends Controller {
 			$data['success'] = true;
 			$data['redirect_url'] = url('admin/data-entry/type1');
 		}else{
-			$data['message'] = $validator->errors();
 			$data['success'] = false;
+            $error = '';
+            $messages = $validator->messages();
+            foreach($messages->all() as $message){
+                $error = $message;
+                break;
+            }
+            $data['success'] = false;
+            $data['message'] = $error;
 		}
 
 

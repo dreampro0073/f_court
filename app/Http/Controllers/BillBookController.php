@@ -106,8 +106,15 @@ class BillBookController extends Controller {
 			$data['success'] = true;
 			$data['redirect_url'] = url('admin/bill-books/type1');
 		}else{
-			$data['message'] = $validator->errors();
 			$data['success'] = false;
+            $error = '';
+            $messages = $validator->messages();
+            foreach($messages->all() as $message){
+                $error = $message;
+                break;
+            }
+            $data['success'] = false;
+            $data['message'] = $error;
 		}
 
 

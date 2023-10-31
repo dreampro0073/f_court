@@ -29,9 +29,12 @@ app.controller('dayBookCtrl', function($scope , $http, $timeout , DBService) {
   
     
     $scope.store = function () {
+        $scope.loading= true;
+
         
         DBService.postCall($scope.formData, '/api/day-book/store').then((data) => {
             
+            $scope.loading= false;
             
             if(data.success){
                 window.location = data.redirect_url;

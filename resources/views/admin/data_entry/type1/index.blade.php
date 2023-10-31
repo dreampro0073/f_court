@@ -18,7 +18,7 @@
         <div class="col-md-6 text-right">
             <a href="{{url('admin/data-entry/type1/add')}}" class="btn btn-primary">Add</a>
 
-            <a href="{{url('admin/data-entry/type1?exportExcel=1')}}" class="btn btn-primary">Export</a>
+           <!--  <a href="{{url('admin/data-entry/type1?exportExcel=1')}}" class="btn btn-primary">Export</a> -->
         </div>
     </div>    
     <div class="card shadow mb-4"> 
@@ -65,7 +65,7 @@
 @endsection
 
 @section('footer_scripts')
-    <?php $version = "1.2.3"; ?>
+    <?php $version = "1.2.34"; ?>
         
     <script type="text/javascript" src="{{url('assets/scripts/core/type1_ctrl.js?v='.$version)}}" ></script>
 

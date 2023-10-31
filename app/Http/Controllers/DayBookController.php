@@ -73,8 +73,15 @@ class DayBookController extends Controller {
 
 			$data['redirect_url'] = url('admin/day-book');
 		}else{
-			$data['message'] = $validator->errors([]);
 			$data['success'] = false;
+            $error = '';
+            $messages = $validator->messages();
+            foreach($messages->all() as $message){
+                $error = $message;
+                break;
+            }
+            $data['success'] = false;
+            $data['message'] = $error;
 		}
 		return Response::json($data, 200, []);
 	}

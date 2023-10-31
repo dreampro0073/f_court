@@ -46,9 +46,12 @@ app.controller('type4Ctrl', function($scope , $http, $timeout , DBService) {
     }
     
     $scope.storeType4 = function () {
+        $scope.loading= true;
+
 
         DBService.postCall($scope.formData, '/api/data-entry/type4/store').then((data) => {
-             alert(data.message);
+            alert(data.message);
+            $scope.loading= false;
 
             if(data.success){
                 window.location = data.redirect_url;

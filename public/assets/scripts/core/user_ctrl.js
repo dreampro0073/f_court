@@ -1,4 +1,4 @@
-app.controller('type6Ctrl', function($scope , $http, $timeout , DBService) {
+app.controller('userCtrl', function($scope , $http, $timeout , DBService) {
     $scope.formData = {
         
     }

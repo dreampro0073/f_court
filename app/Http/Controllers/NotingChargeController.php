@@ -91,11 +91,8 @@ class NotingChargeController extends Controller {
 		$validator = Validator::make($cre,$rules);
 
 		if($validator->passes()){
-			$day_id = $request->tat;
-			if (isset($request->new_day)) {
-				$day_id = User::addDays($request->new_day);
-			}
-
+			$day_id = $request->has('tat')?$request->tat:0;
+			
 			$tehsil_id = $request->tehsil_id;
 
 			if (isset($request->tehsil_name)) {
@@ -146,7 +143,15 @@ class NotingChargeController extends Controller {
 			$data['success'] = true;
 			$data['redirect_url'] = url('admin/data-entry/noting-charge');
 		}else{
-			$data['success'] = false;          
+			$data['success'] = false;
+            $error = '';
+            $messages = $validator->messages();
+            foreach($messages->all() as $message){
+                $error = $message;
+                break;
+            }
+            $data['success'] = false;
+            $data['message'] = $error;        
 		}
 		return Response::json($data,200,array());
 	}
